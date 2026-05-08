@@ -1,0 +1,26 @@
+{
+    "name": "hooksniff/hooksniff-php",
+    "description": "Official PHP client for HookSniff webhook delivery service",
+    "type": "library",
+    "version": "0.1.0",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "HookSniff",
+            "email": "support@hooksniff.vercel.app"
+        }
+    ],
+    "require": {
+        "php": ">=8.0",
+        "ext-json": "*",
+        "ext-openssl": "*",
+        "ext-curl": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "HookSniff\\": "src/"
+        }
+    },
+    "keywords": ["webhooks", "hooksniff", "sdk", "delivery"],
+    "homepage": "https://github.com/hooksniff/hooksniff-php"
+}
