@@ -1,5 +1,8 @@
 # HookSniff PHP SDK
 
+[![Packagist](https://img.shields.io/packagist/v/hooksniff/hooksniff-php.svg)](https://packagist.org/packages/hooksniff/hooksniff-php)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
 Official PHP client for the [HookSniff](https://hooksniff.vercel.app) webhook delivery service.
 
 ## Installation
@@ -122,7 +125,7 @@ Verify incoming webhook signatures in your handler:
 use HookSniff\WebhookVerification;
 
 $payload = file_get_contents('php://input');
-$signature = $_SERVER['HTTP_X_HOOKRELAY_SIGNATURE'] ?? '';
+$signature = $_SERVER['HTTP_X_HOOKSNIFF_SIGNATURE'] ?? '';
 $secret = 'whsec_your_endpoint_signing_secret';
 
 if (!WebhookVerification::verifySignature($payload, $signature, $secret)) {
