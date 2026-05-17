@@ -12,6 +12,12 @@ use HookSniff\Api\Health;
 use HookSniff\Api\Message;
 use HookSniff\Api\MessageAttempt;
 use HookSniff\Api\Statistics;
+use HookSniff\Api\Environment;
+use HookSniff\Api\BackgroundTask;
+use HookSniff\Api\OperationalWebhook;
+use HookSniff\Api\MessagePoller;
+use HookSniff\Api\Inbound;
+use HookSniff\Api\Connector;
 use HookSniff\Request\HookSniffHttpClient;
 
 class HookSniff
@@ -23,6 +29,14 @@ class HookSniff
     public Message $message;
     public MessageAttempt $messageAttempt;
     public Statistics $statistics;
+    public Environment $environment;
+    public BackgroundTask $backgroundTask;
+    public OperationalWebhook $operationalWebhook;
+    public MessagePoller $messagePoller;
+    public Inbound $inbound;
+    public Connector $connector;
+    public Integration $integration;
+    public Stream $stream;
 
     public function __construct(
         string $token,
@@ -45,5 +59,13 @@ class HookSniff
         $this->message = new Message($hooksniffHttpClient);
         $this->messageAttempt = new MessageAttempt($hooksniffHttpClient);
         $this->statistics = new Statistics($hooksniffHttpClient);
+        $this->environment = new Environment($hooksniffHttpClient);
+        $this->backgroundTask = new BackgroundTask($hooksniffHttpClient);
+        $this->operationalWebhook = new OperationalWebhook($hooksniffHttpClient);
+        $this->messagePoller = new MessagePoller($hooksniffHttpClient);
+        $this->inbound = new Inbound($hooksniffHttpClient);
+        $this->connector = new Connector($hooksniffHttpClient);
+        $this->integration = new Integration($hooksniffHttpClient);
+        $this->stream = new Stream($hooksniffHttpClient);
     }
 }
