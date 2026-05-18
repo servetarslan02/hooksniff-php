@@ -21,7 +21,7 @@ class Environment
      */
     public function list(): array
     {
-        $request = $this->client->newReq('GET', '/api/v1/environments');
+        $request = $this->client->newReq('GET', '/v1/environments');
         $res = $this->client->send($request);
 
         return json_decode($res, true);
@@ -34,7 +34,7 @@ class Environment
      */
     public function create(array $body): array
     {
-        $request = $this->client->newReq('POST', '/api/v1/environments');
+        $request = $this->client->newReq('POST', '/v1/environments');
         $request->setBody(json_encode($body));
         $res = $this->client->send($request);
 
@@ -48,7 +48,7 @@ class Environment
      */
     public function get(string $id): array
     {
-        $request = $this->client->newReq('GET', "/api/v1/environments/{$id}");
+        $request = $this->client->newReq('GET', "/v1/environments/{$id}");
         $res = $this->client->send($request);
 
         return json_decode($res, true);
@@ -61,7 +61,7 @@ class Environment
      */
     public function update(string $id, array $body): array
     {
-        $request = $this->client->newReq('PUT', "/api/v1/environments/{$id}");
+        $request = $this->client->newReq('PUT', "/v1/environments/{$id}");
         $request->setBody(json_encode($body));
         $res = $this->client->send($request);
 
@@ -75,7 +75,7 @@ class Environment
      */
     public function delete(string $id): void
     {
-        $request = $this->client->newReq('DELETE', "/api/v1/environments/{$id}");
+        $request = $this->client->newReq('DELETE', "/v1/environments/{$id}");
         $this->client->sendNoResponseBody($request);
     }
 
@@ -86,7 +86,7 @@ class Environment
      */
     public function listVariables(string $id): array
     {
-        $request = $this->client->newReq('GET', "/api/v1/environments/{$id}/variables");
+        $request = $this->client->newReq('GET', "/v1/environments/{$id}/variables");
         $res = $this->client->send($request);
 
         return json_decode($res, true);
@@ -99,7 +99,7 @@ class Environment
      */
     public function createVariable(string $id, array $body): array
     {
-        $request = $this->client->newReq('POST', "/api/v1/environments/{$id}/variables");
+        $request = $this->client->newReq('POST', "/v1/environments/{$id}/variables");
         $request->setBody(json_encode($body));
         $res = $this->client->send($request);
 
@@ -113,7 +113,7 @@ class Environment
      */
     public function updateVariable(string $envId, string $varId, array $body): array
     {
-        $request = $this->client->newReq('PUT', "/api/v1/environments/{$envId}/variables/{$varId}");
+        $request = $this->client->newReq('PUT', "/v1/environments/{$envId}/variables/{$varId}");
         $request->setBody(json_encode($body));
         $res = $this->client->send($request);
 
@@ -127,7 +127,7 @@ class Environment
      */
     public function deleteVariable(string $envId, string $varId): void
     {
-        $request = $this->client->newReq('DELETE', "/api/v1/environments/{$envId}/variables/{$varId}");
+        $request = $this->client->newReq('DELETE', "/v1/environments/{$envId}/variables/{$varId}");
         $this->client->sendNoResponseBody($request);
     }
 
@@ -138,7 +138,7 @@ class Environment
      */
     public function bulkUpsertVariables(string $id, array $body): array
     {
-        $request = $this->client->newReq('POST', "/api/v1/environments/{$id}/variables/bulk");
+        $request = $this->client->newReq('POST', "/v1/environments/{$id}/variables/bulk");
         $request->setBody(json_encode($body));
         $res = $this->client->send($request);
 

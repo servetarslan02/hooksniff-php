@@ -21,7 +21,7 @@ class Device
      */
     public function list(): array
     {
-        $request = $this->client->newReq('GET', '/api/v1/devices');
+        $request = $this->client->newReq('GET', '/v1/devices');
         $res = $this->client->send($request);
 
         return json_decode($res, true);
@@ -34,7 +34,7 @@ class Device
      */
     public function register(array $body): array
     {
-        $request = $this->client->newReq('POST', '/api/v1/devices');
+        $request = $this->client->newReq('POST', '/v1/devices');
         $request->setBody(json_encode($body));
         $res = $this->client->send($request);
 
@@ -48,7 +48,7 @@ class Device
      */
     public function delete(string $id): void
     {
-        $request = $this->client->newReq('DELETE', "/api/v1/devices/{$id}");
+        $request = $this->client->newReq('DELETE', "/v1/devices/{$id}");
         $this->client->sendNoResponseBody($request);
     }
 }

@@ -21,7 +21,7 @@ class ServiceToken
      */
     public function list(): array
     {
-        $request = $this->client->newReq('GET', '/api/v1/service-tokens');
+        $request = $this->client->newReq('GET', '/v1/service-tokens');
         $res = $this->client->send($request);
 
         return json_decode($res, true);
@@ -34,7 +34,7 @@ class ServiceToken
      */
     public function create(array $body): array
     {
-        $request = $this->client->newReq('POST', '/api/v1/service-tokens');
+        $request = $this->client->newReq('POST', '/v1/service-tokens');
         $request->setBody(json_encode($body));
         $res = $this->client->send($request);
 
@@ -48,7 +48,7 @@ class ServiceToken
      */
     public function delete(string $id): void
     {
-        $request = $this->client->newReq('DELETE', "/api/v1/service-tokens/{$id}");
+        $request = $this->client->newReq('DELETE', "/v1/service-tokens/{$id}");
         $this->client->sendNoResponseBody($request);
     }
 
@@ -59,7 +59,7 @@ class ServiceToken
      */
     public function update(string $id, array $body): array
     {
-        $request = $this->client->newReq('PUT', "/api/v1/service-tokens/{$id}");
+        $request = $this->client->newReq('PUT', "/v1/service-tokens/{$id}");
         $request->setBody(json_encode($body));
         $res = $this->client->send($request);
 
@@ -73,7 +73,7 @@ class ServiceToken
      */
     public function reveal(string $id): array
     {
-        $request = $this->client->newReq('POST', "/api/v1/service-tokens/{$id}/reveal");
+        $request = $this->client->newReq('POST', "/v1/service-tokens/{$id}/reveal");
         $res = $this->client->send($request);
 
         return json_decode($res, true);

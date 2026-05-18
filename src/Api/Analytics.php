@@ -21,7 +21,7 @@ class Analytics
      */
     public function deliveryTrend(array $params = []): array
     {
-        $request = $this->client->newReq('GET', '/api/v1/analytics/deliveries');
+        $request = $this->client->newReq('GET', '/v1/analytics/deliveries');
         foreach ($params as $key => $value) {
             $request->setQueryParam($key, $value);
         }
@@ -37,7 +37,7 @@ class Analytics
      */
     public function successRate(array $params = []): array
     {
-        $request = $this->client->newReq('GET', '/api/v1/analytics/success-rate');
+        $request = $this->client->newReq('GET', '/v1/analytics/success-rate');
         foreach ($params as $key => $value) {
             $request->setQueryParam($key, $value);
         }
@@ -53,7 +53,7 @@ class Analytics
      */
     public function latencyTrend(array $params = []): array
     {
-        $request = $this->client->newReq('GET', '/api/v1/analytics/latency');
+        $request = $this->client->newReq('GET', '/v1/analytics/latency');
         foreach ($params as $key => $value) {
             $request->setQueryParam($key, $value);
         }

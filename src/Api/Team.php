@@ -21,7 +21,7 @@ class Team
      */
     public function list(): array
     {
-        $request = $this->client->newReq('GET', '/api/v1/teams');
+        $request = $this->client->newReq('GET', '/v1/teams');
         $res = $this->client->send($request);
 
         return json_decode($res, true);
@@ -34,7 +34,7 @@ class Team
      */
     public function create(array $body): array
     {
-        $request = $this->client->newReq('POST', '/api/v1/teams');
+        $request = $this->client->newReq('POST', '/v1/teams');
         $request->setBody(json_encode($body));
         $res = $this->client->send($request);
 
@@ -48,7 +48,7 @@ class Team
      */
     public function get(string $id): array
     {
-        $request = $this->client->newReq('GET', "/api/v1/teams/{$id}");
+        $request = $this->client->newReq('GET', "/v1/teams/{$id}");
         $res = $this->client->send($request);
 
         return json_decode($res, true);
@@ -61,7 +61,7 @@ class Team
      */
     public function acceptInvite(array $body): array
     {
-        $request = $this->client->newReq('POST', '/api/v1/teams/accept-invite');
+        $request = $this->client->newReq('POST', '/v1/teams/accept-invite');
         $request->setBody(json_encode($body));
         $res = $this->client->send($request);
 
@@ -75,7 +75,7 @@ class Team
      */
     public function inviteMember(string $teamId, array $body): array
     {
-        $request = $this->client->newReq('POST', "/api/v1/teams/{$teamId}/invite");
+        $request = $this->client->newReq('POST', "/v1/teams/{$teamId}/invite");
         $request->setBody(json_encode($body));
         $res = $this->client->send($request);
 
@@ -89,7 +89,7 @@ class Team
      */
     public function listMembers(string $teamId): array
     {
-        $request = $this->client->newReq('GET', "/api/v1/teams/{$teamId}/members");
+        $request = $this->client->newReq('GET', "/v1/teams/{$teamId}/members");
         $res = $this->client->send($request);
 
         return json_decode($res, true);
@@ -102,7 +102,7 @@ class Team
      */
     public function removeMember(string $teamId, string $userId): void
     {
-        $request = $this->client->newReq('DELETE', "/api/v1/teams/{$teamId}/members/{$userId}");
+        $request = $this->client->newReq('DELETE', "/v1/teams/{$teamId}/members/{$userId}");
         $this->client->sendNoResponseBody($request);
     }
 
@@ -113,7 +113,7 @@ class Team
      */
     public function changeRole(string $teamId, string $userId, array $body): array
     {
-        $request = $this->client->newReq('PUT', "/api/v1/teams/{$teamId}/members/{$userId}/role");
+        $request = $this->client->newReq('PUT', "/v1/teams/{$teamId}/members/{$userId}/role");
         $request->setBody(json_encode($body));
         $res = $this->client->send($request);
 

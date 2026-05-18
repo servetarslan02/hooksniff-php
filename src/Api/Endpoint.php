@@ -34,7 +34,7 @@ class Endpoint
     public function list(
         ?EndpointListOptions $options = null,
     ): ListResponseEndpointOut {
-        $request = $this->client->newReq('GET', '/api/v1/endpoint');
+        $request = $this->client->newReq('GET', '/v1/endpoint');
         if (null !== $options) {
             $request->setQueryParam('limit', $options->limit);
             $request->setQueryParam('iterator', $options->iterator);
@@ -54,7 +54,7 @@ class Endpoint
         EndpointIn $endpointIn,
         ?EndpointCreateOptions $options = null,
     ): EndpointOut {
-        $request = $this->client->newReq('POST', '/api/v1/endpoint');
+        $request = $this->client->newReq('POST', '/v1/endpoint');
         if (null !== $options) {
             $request->setHeaderParam('idempotency-key', $options->idempotencyKey);
         }
@@ -72,7 +72,7 @@ class Endpoint
     public function get(
         string $endpointId,
     ): EndpointOut {
-        $request = $this->client->newReq('GET', "/api/v1/endpoint/{$endpointId}");
+        $request = $this->client->newReq('GET', "/v1/endpoint/{$endpointId}");
         $res = $this->client->send($request);
 
         return EndpointOut::fromJson($res);
@@ -87,7 +87,7 @@ class Endpoint
         string $endpointId,
         EndpointUpdate $endpointUpdate,
     ): EndpointOut {
-        $request = $this->client->newReq('PUT', "/api/v1/endpoint/{$endpointId}");
+        $request = $this->client->newReq('PUT', "/v1/endpoint/{$endpointId}");
         $request->setBody(json_encode($endpointUpdate));
         $res = $this->client->send($request);
 
@@ -102,7 +102,7 @@ class Endpoint
     public function delete(
         string $endpointId,
     ): void {
-        $request = $this->client->newReq('DELETE', "/api/v1/endpoint/{$endpointId}");
+        $request = $this->client->newReq('DELETE', "/v1/endpoint/{$endpointId}");
         $this->client->sendNoResponseBody($request);
     }
 
@@ -115,7 +115,7 @@ class Endpoint
         string $endpointId,
         EndpointPatch $endpointPatch,
     ): EndpointOut {
-        $request = $this->client->newReq('PATCH', "/api/v1/endpoint/{$endpointId}");
+        $request = $this->client->newReq('PATCH', "/v1/endpoint/{$endpointId}");
         $request->setBody(json_encode($endpointPatch));
         $res = $this->client->send($request);
 
@@ -130,7 +130,7 @@ class Endpoint
     public function getHeaders(
         string $endpointId,
     ): EndpointHeadersOut {
-        $request = $this->client->newReq('GET', "/api/v1/endpoint/{$endpointId}/headers");
+        $request = $this->client->newReq('GET', "/v1/endpoint/{$endpointId}/headers");
         $res = $this->client->send($request);
 
         return EndpointHeadersOut::fromJson($res);
@@ -145,7 +145,7 @@ class Endpoint
         string $endpointId,
         EndpointHeadersIn $endpointHeadersIn,
     ): void {
-        $request = $this->client->newReq('PUT', "/api/v1/endpoint/{$endpointId}/headers");
+        $request = $this->client->newReq('PUT', "/v1/endpoint/{$endpointId}/headers");
         $request->setBody(json_encode($endpointHeadersIn));
         $this->client->sendNoResponseBody($request);
     }
@@ -159,7 +159,7 @@ class Endpoint
         string $endpointId,
         EndpointHeadersPatchIn $endpointHeadersPatchIn,
     ): void {
-        $request = $this->client->newReq('PATCH', "/api/v1/endpoint/{$endpointId}/headers");
+        $request = $this->client->newReq('PATCH', "/v1/endpoint/{$endpointId}/headers");
         $request->setBody(json_encode($endpointHeadersPatchIn));
         $this->client->sendNoResponseBody($request);
     }
@@ -172,7 +172,7 @@ class Endpoint
     public function getSecret(
         string $endpointId,
     ): EndpointSecretOut {
-        $request = $this->client->newReq('GET', "/api/v1/endpoint/{$endpointId}/secret");
+        $request = $this->client->newReq('GET', "/v1/endpoint/{$endpointId}/secret");
         $res = $this->client->send($request);
 
         return EndpointSecretOut::fromJson($res);
@@ -190,7 +190,7 @@ class Endpoint
         EndpointSecretRotateIn $endpointSecretRotateIn,
         ?EndpointRotateSecretOptions $options = null,
     ): void {
-        $request = $this->client->newReq('POST', "/api/v1/endpoint/{$endpointId}/secret/rotate");
+        $request = $this->client->newReq('POST', "/v1/endpoint/{$endpointId}/secret/rotate");
         if (null !== $options) {
             $request->setHeaderParam('idempotency-key', $options->idempotencyKey);
         }
@@ -207,7 +207,7 @@ class Endpoint
         string $endpointId,
         EventExampleIn $eventExampleIn,
     ): MessageOut {
-        $request = $this->client->newReq('POST', "/api/v1/endpoint/{$endpointId}/send-example");
+        $request = $this->client->newReq('POST', "/v1/endpoint/{$endpointId}/send-example");
         $request->setBody(json_encode($eventExampleIn));
         $res = $this->client->send($request);
 

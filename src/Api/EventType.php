@@ -30,7 +30,7 @@ class EventType
     public function list(
         ?EventTypeListOptions $options = null,
     ): ListResponseEventTypeOut {
-        $request = $this->client->newReq('GET', '/api/v1/event-type');
+        $request = $this->client->newReq('GET', '/v1/event-type');
         if (null !== $options) {
             $request->setQueryParam('limit', $options->limit);
             $request->setQueryParam('iterator', $options->iterator);
@@ -56,7 +56,7 @@ class EventType
         EventTypeIn $eventTypeIn,
         ?EventTypeCreateOptions $options = null,
     ): EventTypeOut {
-        $request = $this->client->newReq('POST', '/api/v1/event-type');
+        $request = $this->client->newReq('POST', '/v1/event-type');
         if (null !== $options) {
             $request->setHeaderParam('idempotency-key', $options->idempotencyKey);
         }
@@ -79,7 +79,7 @@ class EventType
         EventTypeImportOpenApiIn $eventTypeImportOpenApiIn,
         ?EventTypeImportOpenapiOptions $options = null,
     ): EventTypeImportOpenApiOut {
-        $request = $this->client->newReq('POST', '/api/v1/event-type/import/openapi');
+        $request = $this->client->newReq('POST', '/v1/event-type/import/openapi');
         if (null !== $options) {
             $request->setHeaderParam('idempotency-key', $options->idempotencyKey);
         }
@@ -97,7 +97,7 @@ class EventType
     public function get(
         string $eventTypeName,
     ): EventTypeOut {
-        $request = $this->client->newReq('GET', "/api/v1/event-type/{$eventTypeName}");
+        $request = $this->client->newReq('GET', "/v1/event-type/{$eventTypeName}");
         $res = $this->client->send($request);
 
         return EventTypeOut::fromJson($res);
@@ -112,7 +112,7 @@ class EventType
         string $eventTypeName,
         EventTypeUpdate $eventTypeUpdate,
     ): EventTypeOut {
-        $request = $this->client->newReq('PUT', "/api/v1/event-type/{$eventTypeName}");
+        $request = $this->client->newReq('PUT', "/v1/event-type/{$eventTypeName}");
         $request->setBody(json_encode($eventTypeUpdate));
         $res = $this->client->send($request);
 
@@ -133,7 +133,7 @@ class EventType
         string $eventTypeName,
         ?EventTypeDeleteOptions $options = null,
     ): void {
-        $request = $this->client->newReq('DELETE', "/api/v1/event-type/{$eventTypeName}");
+        $request = $this->client->newReq('DELETE', "/v1/event-type/{$eventTypeName}");
         if (null !== $options) {
             $request->setQueryParam('expunge', $options->expunge);
         }
@@ -149,7 +149,7 @@ class EventType
         string $eventTypeName,
         EventTypePatch $eventTypePatch,
     ): EventTypeOut {
-        $request = $this->client->newReq('PATCH', "/api/v1/event-type/{$eventTypeName}");
+        $request = $this->client->newReq('PATCH', "/v1/event-type/{$eventTypeName}");
         $request->setBody(json_encode($eventTypePatch));
         $res = $this->client->send($request);
 

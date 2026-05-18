@@ -21,7 +21,7 @@ class Inbound
      */
     public function listConfigs(): array
     {
-        $request = $this->client->newReq('GET', '/api/v1/inbound/configs');
+        $request = $this->client->newReq('GET', '/v1/inbound/configs');
         $res = $this->client->send($request);
 
         return json_decode($res, true);
@@ -34,7 +34,7 @@ class Inbound
      */
     public function createConfig(array $body): array
     {
-        $request = $this->client->newReq('POST', '/api/v1/inbound/configs');
+        $request = $this->client->newReq('POST', '/v1/inbound/configs');
         $request->setBody(json_encode($body));
         $res = $this->client->send($request);
 
@@ -48,7 +48,7 @@ class Inbound
      */
     public function updateConfig(string $id, array $body): array
     {
-        $request = $this->client->newReq('PUT', "/api/v1/inbound/configs/{$id}");
+        $request = $this->client->newReq('PUT', "/v1/inbound/configs/{$id}");
         $request->setBody(json_encode($body));
         $res = $this->client->send($request);
 
@@ -62,7 +62,7 @@ class Inbound
      */
     public function deleteConfig(string $id): void
     {
-        $request = $this->client->newReq('DELETE', "/api/v1/inbound/configs/{$id}");
+        $request = $this->client->newReq('DELETE', "/v1/inbound/configs/{$id}");
         $this->client->sendNoResponseBody($request);
     }
 
@@ -73,7 +73,7 @@ class Inbound
      */
     public function handle(string $provider, array $body, array $headers = []): array
     {
-        $request = $this->client->newReq('POST', "/api/v1/inbound/{$provider}");
+        $request = $this->client->newReq('POST', "/v1/inbound/{$provider}");
         $request->setBody(json_encode($body));
         foreach ($headers as $key => $value) {
             $request->setHeaderParam($key, $value);

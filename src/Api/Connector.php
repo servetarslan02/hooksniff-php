@@ -21,7 +21,7 @@ class Connector
      */
     public function list(): array
     {
-        $request = $this->client->newReq('GET', '/api/v1/connectors');
+        $request = $this->client->newReq('GET', '/v1/connectors');
         $res = $this->client->send($request);
 
         return json_decode($res, true);
@@ -34,7 +34,7 @@ class Connector
      */
     public function get(string $id): array
     {
-        $request = $this->client->newReq('GET', "/api/v1/connectors/{$id}");
+        $request = $this->client->newReq('GET', "/v1/connectors/{$id}");
         $res = $this->client->send($request);
 
         return json_decode($res, true);
@@ -47,7 +47,7 @@ class Connector
      */
     public function listConfigs(): array
     {
-        $request = $this->client->newReq('GET', '/api/v1/connectors/configs');
+        $request = $this->client->newReq('GET', '/v1/connectors/configs');
         $res = $this->client->send($request);
 
         return json_decode($res, true);
@@ -60,7 +60,7 @@ class Connector
      */
     public function createConfig(array $body): array
     {
-        $request = $this->client->newReq('POST', '/api/v1/connectors/configs');
+        $request = $this->client->newReq('POST', '/v1/connectors/configs');
         $request->setBody(json_encode($body));
         $res = $this->client->send($request);
 
@@ -74,7 +74,7 @@ class Connector
      */
     public function getConfig(string $id): array
     {
-        $request = $this->client->newReq('GET', "/api/v1/connectors/configs/{$id}");
+        $request = $this->client->newReq('GET', "/v1/connectors/configs/{$id}");
         $res = $this->client->send($request);
 
         return json_decode($res, true);
@@ -87,7 +87,7 @@ class Connector
      */
     public function updateConfig(string $id, array $body): array
     {
-        $request = $this->client->newReq('PUT', "/api/v1/connectors/configs/{$id}");
+        $request = $this->client->newReq('PUT', "/v1/connectors/configs/{$id}");
         $request->setBody(json_encode($body));
         $res = $this->client->send($request);
 
@@ -101,7 +101,7 @@ class Connector
      */
     public function deleteConfig(string $id): void
     {
-        $request = $this->client->newReq('DELETE', "/api/v1/connectors/configs/{$id}");
+        $request = $this->client->newReq('DELETE', "/v1/connectors/configs/{$id}");
         $this->client->sendNoResponseBody($request);
     }
 }

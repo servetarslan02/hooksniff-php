@@ -21,7 +21,7 @@ class MessagePoller
      */
     public function poll(array $params = []): array
     {
-        $request = $this->client->newReq('GET', '/api/v1/message-poller/poll');
+        $request = $this->client->newReq('GET', '/v1/message-poller/poll');
         foreach ($params as $key => $value) {
             $request->setQueryParam($key, $value);
         }
@@ -37,7 +37,7 @@ class MessagePoller
      */
     public function seek(array $body): array
     {
-        $request = $this->client->newReq('POST', '/api/v1/message-poller/seek');
+        $request = $this->client->newReq('POST', '/v1/message-poller/seek');
         $request->setBody(json_encode($body));
         $res = $this->client->send($request);
 
@@ -51,7 +51,7 @@ class MessagePoller
      */
     public function commit(array $body): array
     {
-        $request = $this->client->newReq('POST', '/api/v1/message-poller/commit');
+        $request = $this->client->newReq('POST', '/v1/message-poller/commit');
         $request->setBody(json_encode($body));
         $res = $this->client->send($request);
 

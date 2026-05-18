@@ -21,7 +21,7 @@ class Sso
      */
     public function getConfig(): array
     {
-        $request = $this->client->newReq('GET', '/api/v1/sso/config');
+        $request = $this->client->newReq('GET', '/v1/sso/config');
         $res = $this->client->send($request);
 
         return json_decode($res, true);
@@ -34,7 +34,7 @@ class Sso
      */
     public function upsertConfig(array $body): array
     {
-        $request = $this->client->newReq('POST', '/api/v1/sso/config');
+        $request = $this->client->newReq('POST', '/v1/sso/config');
         $request->setBody(json_encode($body));
         $res = $this->client->send($request);
 
@@ -48,7 +48,7 @@ class Sso
      */
     public function deleteConfig(): void
     {
-        $request = $this->client->newReq('DELETE', '/api/v1/sso/config');
+        $request = $this->client->newReq('DELETE', '/v1/sso/config');
         $this->client->sendNoResponseBody($request);
     }
 
@@ -59,7 +59,7 @@ class Sso
      */
     public function testConnection(): array
     {
-        $request = $this->client->newReq('POST', '/api/v1/sso/test');
+        $request = $this->client->newReq('POST', '/v1/sso/test');
         $res = $this->client->send($request);
 
         return json_decode($res, true);

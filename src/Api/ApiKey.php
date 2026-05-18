@@ -21,7 +21,7 @@ class ApiKey
      */
     public function list(): array
     {
-        $request = $this->client->newReq('GET', '/api/v1/api-keys');
+        $request = $this->client->newReq('GET', '/v1/api-keys');
         $res = $this->client->send($request);
 
         return json_decode($res, true);
@@ -34,7 +34,7 @@ class ApiKey
      */
     public function create(array $body): array
     {
-        $request = $this->client->newReq('POST', '/api/v1/api-keys');
+        $request = $this->client->newReq('POST', '/v1/api-keys');
         $request->setBody(json_encode($body));
         $res = $this->client->send($request);
 
@@ -48,7 +48,7 @@ class ApiKey
      */
     public function delete(string $id): void
     {
-        $request = $this->client->newReq('DELETE', "/api/v1/api-keys/{$id}");
+        $request = $this->client->newReq('DELETE', "/v1/api-keys/{$id}");
         $this->client->sendNoResponseBody($request);
     }
 
@@ -59,7 +59,7 @@ class ApiKey
      */
     public function rotate(string $id): array
     {
-        $request = $this->client->newReq('POST', "/api/v1/api-keys/{$id}/rotate");
+        $request = $this->client->newReq('POST', "/v1/api-keys/{$id}/rotate");
         $res = $this->client->send($request);
 
         return json_decode($res, true);

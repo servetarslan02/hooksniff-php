@@ -21,7 +21,7 @@ class Integration
      */
     public function list(): array
     {
-        $request = $this->client->newReq('GET', '/api/v1/integrations');
+        $request = $this->client->newReq('GET', '/v1/integrations');
         $res = $this->client->send($request);
 
         return json_decode($res, true);
@@ -34,7 +34,7 @@ class Integration
      */
     public function get(string $id): array
     {
-        $request = $this->client->newReq('GET', "/api/v1/integrations/{$id}");
+        $request = $this->client->newReq('GET', "/v1/integrations/{$id}");
         $res = $this->client->send($request);
 
         return json_decode($res, true);
@@ -47,7 +47,7 @@ class Integration
      */
     public function create(array $body): array
     {
-        $request = $this->client->newReq('POST', '/api/v1/integrations');
+        $request = $this->client->newReq('POST', '/v1/integrations');
         $request->setBody(json_encode($body));
         $res = $this->client->send($request);
 
@@ -61,7 +61,7 @@ class Integration
      */
     public function update(string $id, array $body): array
     {
-        $request = $this->client->newReq('PUT', "/api/v1/integrations/{$id}");
+        $request = $this->client->newReq('PUT', "/v1/integrations/{$id}");
         $request->setBody(json_encode($body));
         $res = $this->client->send($request);
 
@@ -75,7 +75,7 @@ class Integration
      */
     public function delete(string $id): void
     {
-        $request = $this->client->newReq('DELETE', "/api/v1/integrations/{$id}");
+        $request = $this->client->newReq('DELETE', "/v1/integrations/{$id}");
         $this->client->sendNoResponseBody($request);
     }
 
@@ -86,7 +86,7 @@ class Integration
      */
     public function test(string $id): array
     {
-        $request = $this->client->newReq('POST', "/api/v1/integrations/{$id}/test");
+        $request = $this->client->newReq('POST', "/v1/integrations/{$id}/test");
         $res = $this->client->send($request);
 
         return json_decode($res, true);
@@ -99,7 +99,7 @@ class Integration
      */
     public function listEvents(string $id, array $params = []): array
     {
-        $request = $this->client->newReq('GET', "/api/v1/integrations/{$id}/events");
+        $request = $this->client->newReq('GET', "/v1/integrations/{$id}/events");
         foreach ($params as $key => $value) {
             $request->setQueryParam($key, $value);
         }
@@ -115,7 +115,7 @@ class Integration
      */
     public function getStats(string $id): array
     {
-        $request = $this->client->newReq('GET', "/api/v1/integrations/{$id}/stats");
+        $request = $this->client->newReq('GET', "/v1/integrations/{$id}/stats");
         $res = $this->client->send($request);
 
         return json_decode($res, true);

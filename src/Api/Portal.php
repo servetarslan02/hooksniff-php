@@ -21,7 +21,7 @@ class Portal
      */
     public function getConfig(): array
     {
-        $request = $this->client->newReq('GET', '/api/v1/portal/config');
+        $request = $this->client->newReq('GET', '/v1/portal/config');
         $res = $this->client->send($request);
 
         return json_decode($res, true);
@@ -34,7 +34,7 @@ class Portal
      */
     public function updateConfig(array $body): array
     {
-        $request = $this->client->newReq('PUT', '/api/v1/portal/config');
+        $request = $this->client->newReq('PUT', '/v1/portal/config');
         $request->setBody(json_encode($body));
         $res = $this->client->send($request);
 
@@ -48,7 +48,7 @@ class Portal
      */
     public function getProfile(): array
     {
-        $request = $this->client->newReq('GET', '/api/v1/portal/me');
+        $request = $this->client->newReq('GET', '/v1/portal/me');
         $res = $this->client->send($request);
 
         return json_decode($res, true);
@@ -61,7 +61,7 @@ class Portal
      */
     public function getUsage(): array
     {
-        $request = $this->client->newReq('GET', '/api/v1/portal/usage');
+        $request = $this->client->newReq('GET', '/v1/portal/usage');
         $res = $this->client->send($request);
 
         return json_decode($res, true);
@@ -74,7 +74,7 @@ class Portal
      */
     public function getEmbedCode(): array
     {
-        $request = $this->client->newReq('GET', '/api/v1/portal/embed-code');
+        $request = $this->client->newReq('GET', '/v1/portal/embed-code');
         $res = $this->client->send($request);
 
         return json_decode($res, true);

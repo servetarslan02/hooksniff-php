@@ -21,7 +21,7 @@ class Template
      */
     public function list(): array
     {
-        $request = $this->client->newReq('GET', '/api/v1/templates');
+        $request = $this->client->newReq('GET', '/v1/templates');
         $res = $this->client->send($request);
 
         return json_decode($res, true);
@@ -34,7 +34,7 @@ class Template
      */
     public function get(string $id): array
     {
-        $request = $this->client->newReq('GET', "/api/v1/templates/{$id}");
+        $request = $this->client->newReq('GET', "/v1/templates/{$id}");
         $res = $this->client->send($request);
 
         return json_decode($res, true);
@@ -47,7 +47,7 @@ class Template
      */
     public function apply(string $id, array $body = []): array
     {
-        $request = $this->client->newReq('POST', "/api/v1/templates/{$id}/apply");
+        $request = $this->client->newReq('POST', "/v1/templates/{$id}/apply");
         $request->setBody(json_encode($body));
         $res = $this->client->send($request);
 

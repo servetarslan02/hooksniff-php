@@ -22,7 +22,7 @@ class Health
      */
     public function get(
     ): void {
-        $request = $this->client->newReq('GET', '/api/v1/health');
+        $request = $this->client->newReq('GET', '/v1/health');
         $res = $this->client->sendNoResponseBody($request);
     }
 }

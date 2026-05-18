@@ -21,7 +21,7 @@ class Admin
      */
     public function listUsers(array $params = []): array
     {
-        $request = $this->client->newReq('GET', '/api/v1/admin/users');
+        $request = $this->client->newReq('GET', '/v1/admin/users');
         foreach ($params as $key => $value) {
             $request->setQueryParam($key, $value);
         }
@@ -37,7 +37,7 @@ class Admin
      */
     public function exportUsersCsv(): string
     {
-        $request = $this->client->newReq('GET', '/api/v1/admin/users/export');
+        $request = $this->client->newReq('GET', '/v1/admin/users/export');
         $res = $this->client->send($request);
 
         return $res;
@@ -50,7 +50,7 @@ class Admin
      */
     public function getUserDetail(string $userId): array
     {
-        $request = $this->client->newReq('GET', "/api/v1/admin/users/{$userId}");
+        $request = $this->client->newReq('GET', "/v1/admin/users/{$userId}");
         $res = $this->client->send($request);
 
         return json_decode($res, true);
@@ -63,7 +63,7 @@ class Admin
      */
     public function changePlan(string $userId, array $body): array
     {
-        $request = $this->client->newReq('PUT', "/api/v1/admin/users/{$userId}/plan");
+        $request = $this->client->newReq('PUT', "/v1/admin/users/{$userId}/plan");
         $request->setBody(json_encode($body));
         $res = $this->client->send($request);
 
@@ -77,7 +77,7 @@ class Admin
      */
     public function getUserPlanHistory(string $userId): array
     {
-        $request = $this->client->newReq('GET', "/api/v1/admin/users/{$userId}/plan-history");
+        $request = $this->client->newReq('GET', "/v1/admin/users/{$userId}/plan-history");
         $res = $this->client->send($request);
 
         return json_decode($res, true);
@@ -90,7 +90,7 @@ class Admin
      */
     public function sendUserEmail(string $userId, array $body): array
     {
-        $request = $this->client->newReq('POST', "/api/v1/admin/users/{$userId}/send-email");
+        $request = $this->client->newReq('POST', "/v1/admin/users/{$userId}/send-email");
         $request->setBody(json_encode($body));
         $res = $this->client->send($request);
 
@@ -104,7 +104,7 @@ class Admin
      */
     public function changeStatus(string $userId, array $body): array
     {
-        $request = $this->client->newReq('PUT', "/api/v1/admin/users/{$userId}/status");
+        $request = $this->client->newReq('PUT', "/v1/admin/users/{$userId}/status");
         $request->setBody(json_encode($body));
         $res = $this->client->send($request);
 
@@ -118,7 +118,7 @@ class Admin
      */
     public function impersonateUser(string $userId): array
     {
-        $request = $this->client->newReq('POST', "/api/v1/admin/users/{$userId}/impersonate");
+        $request = $this->client->newReq('POST', "/v1/admin/users/{$userId}/impersonate");
         $res = $this->client->send($request);
 
         return json_decode($res, true);
@@ -131,7 +131,7 @@ class Admin
      */
     public function getUserAnalytics(string $userId): array
     {
-        $request = $this->client->newReq('GET', "/api/v1/admin/users/{$userId}/analytics");
+        $request = $this->client->newReq('GET', "/v1/admin/users/{$userId}/analytics");
         $res = $this->client->send($request);
 
         return json_decode($res, true);
@@ -144,7 +144,7 @@ class Admin
      */
     public function getSystemStats(): array
     {
-        $request = $this->client->newReq('GET', '/api/v1/admin/stats');
+        $request = $this->client->newReq('GET', '/v1/admin/stats');
         $res = $this->client->send($request);
 
         return json_decode($res, true);
@@ -157,7 +157,7 @@ class Admin
      */
     public function getRevenue(): array
     {
-        $request = $this->client->newReq('GET', '/api/v1/admin/revenue');
+        $request = $this->client->newReq('GET', '/v1/admin/revenue');
         $res = $this->client->send($request);
 
         return json_decode($res, true);
@@ -170,7 +170,7 @@ class Admin
      */
     public function exportRevenueCsv(): string
     {
-        $request = $this->client->newReq('GET', '/api/v1/admin/revenue/export');
+        $request = $this->client->newReq('GET', '/v1/admin/revenue/export');
         $res = $this->client->send($request);
 
         return $res;
@@ -183,7 +183,7 @@ class Admin
      */
     public function getChurnReport(): array
     {
-        $request = $this->client->newReq('GET', '/api/v1/admin/churn');
+        $request = $this->client->newReq('GET', '/v1/admin/churn');
         $res = $this->client->send($request);
 
         return json_decode($res, true);
@@ -196,7 +196,7 @@ class Admin
      */
     public function getAuditLogs(array $params = []): array
     {
-        $request = $this->client->newReq('GET', '/api/v1/admin/audit-logs');
+        $request = $this->client->newReq('GET', '/v1/admin/audit-logs');
         foreach ($params as $key => $value) {
             $request->setQueryParam($key, $value);
         }
@@ -212,7 +212,7 @@ class Admin
      */
     public function replayDelivery(string $deliveryId): array
     {
-        $request = $this->client->newReq('POST', "/api/v1/admin/deliveries/{$deliveryId}/replay");
+        $request = $this->client->newReq('POST', "/v1/admin/deliveries/{$deliveryId}/replay");
         $res = $this->client->send($request);
 
         return json_decode($res, true);
@@ -225,7 +225,7 @@ class Admin
      */
     public function testWebhook(array $body = []): array
     {
-        $request = $this->client->newReq('POST', '/api/v1/admin/test-webhook');
+        $request = $this->client->newReq('POST', '/v1/admin/test-webhook');
         $request->setBody(json_encode($body));
         $res = $this->client->send($request);
 
@@ -239,7 +239,7 @@ class Admin
      */
     public function getSettings(): array
     {
-        $request = $this->client->newReq('GET', '/api/v1/admin/settings');
+        $request = $this->client->newReq('GET', '/v1/admin/settings');
         $res = $this->client->send($request);
 
         return json_decode($res, true);
@@ -252,7 +252,7 @@ class Admin
      */
     public function updateSettings(array $body): array
     {
-        $request = $this->client->newReq('PUT', '/api/v1/admin/settings');
+        $request = $this->client->newReq('PUT', '/v1/admin/settings');
         $request->setBody(json_encode($body));
         $res = $this->client->send($request);
 

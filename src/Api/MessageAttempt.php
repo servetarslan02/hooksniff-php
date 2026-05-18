@@ -25,7 +25,7 @@ class MessageAttempt
         string $endpointId,
         ?MessageAttemptListByEndpointOptions $options = null,
     ): ListResponseMessageAttemptOut {
-        $request = $this->client->newReq('GET', "/api/v1/attempt/endpoint/{$endpointId}");
+        $request = $this->client->newReq('GET', "/v1/attempt/endpoint/{$endpointId}");
         if (null !== $options) {
             $request->setQueryParam('limit', $options->limit);
             $request->setQueryParam('iterator', $options->iterator);
@@ -51,7 +51,7 @@ class MessageAttempt
         string $msgId,
         ?MessageAttemptListByMsgOptions $options = null,
     ): ListResponseMessageAttemptOut {
-        $request = $this->client->newReq('GET', "/api/v1/attempt/msg/{$msgId}");
+        $request = $this->client->newReq('GET', "/v1/attempt/msg/{$msgId}");
         if (null !== $options) {
             $request->setQueryParam('limit', $options->limit);
             $request->setQueryParam('iterator', $options->iterator);
@@ -78,7 +78,7 @@ class MessageAttempt
         string $msgId,
         string $attemptId,
     ): MessageAttemptOut {
-        $request = $this->client->newReq('GET', "/api/v1/msg/{$msgId}/attempt/{$attemptId}");
+        $request = $this->client->newReq('GET', "/v1/msg/{$msgId}/attempt/{$attemptId}");
         $res = $this->client->send($request);
 
         return MessageAttemptOut::fromJson($res);
@@ -93,7 +93,7 @@ class MessageAttempt
         string $msgId,
         string $endpointId,
     ): void {
-        $request = $this->client->newReq('POST', "/api/v1/msg/{$msgId}/endpoint/{$endpointId}/resend");
+        $request = $this->client->newReq('POST', "/v1/msg/{$msgId}/endpoint/{$endpointId}/resend");
         $this->client->sendNoResponseBody($request);
     }
 }

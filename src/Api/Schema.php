@@ -21,7 +21,7 @@ class Schema
      */
     public function list(array $params = []): array
     {
-        $request = $this->client->newReq('GET', '/api/v1/schemas');
+        $request = $this->client->newReq('GET', '/v1/schemas');
         foreach ($params as $key => $value) {
             $request->setQueryParam($key, $value);
         }
@@ -37,7 +37,7 @@ class Schema
      */
     public function register(array $body): array
     {
-        $request = $this->client->newReq('POST', '/api/v1/schemas');
+        $request = $this->client->newReq('POST', '/v1/schemas');
         $request->setBody(json_encode($body));
         $res = $this->client->send($request);
 
@@ -51,7 +51,7 @@ class Schema
      */
     public function get(string $id): array
     {
-        $request = $this->client->newReq('GET', "/api/v1/schemas/{$id}");
+        $request = $this->client->newReq('GET', "/v1/schemas/{$id}");
         $res = $this->client->send($request);
 
         return json_decode($res, true);
@@ -64,7 +64,7 @@ class Schema
      */
     public function validate(string $id, array $body): array
     {
-        $request = $this->client->newReq('POST', "/api/v1/schemas/{$id}/validate");
+        $request = $this->client->newReq('POST', "/v1/schemas/{$id}/validate");
         $request->setBody(json_encode($body));
         $res = $this->client->send($request);
 

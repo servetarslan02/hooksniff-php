@@ -21,7 +21,7 @@ class RateLimit
      */
     public function list(): array
     {
-        $request = $this->client->newReq('GET', '/api/v1/rate-limits');
+        $request = $this->client->newReq('GET', '/v1/rate-limits');
         $res = $this->client->send($request);
 
         return json_decode($res, true);
@@ -34,7 +34,7 @@ class RateLimit
      */
     public function get(string $endpointId): array
     {
-        $request = $this->client->newReq('GET', "/api/v1/rate-limits/{$endpointId}");
+        $request = $this->client->newReq('GET', "/v1/rate-limits/{$endpointId}");
         $res = $this->client->send($request);
 
         return json_decode($res, true);
@@ -47,7 +47,7 @@ class RateLimit
      */
     public function set(string $endpointId, array $body): array
     {
-        $request = $this->client->newReq('POST', "/api/v1/rate-limits/{$endpointId}");
+        $request = $this->client->newReq('POST', "/v1/rate-limits/{$endpointId}");
         $request->setBody(json_encode($body));
         $res = $this->client->send($request);
 
@@ -61,7 +61,7 @@ class RateLimit
      */
     public function delete(string $endpointId): void
     {
-        $request = $this->client->newReq('DELETE', "/api/v1/rate-limits/{$endpointId}");
+        $request = $this->client->newReq('DELETE', "/v1/rate-limits/{$endpointId}");
         $this->client->sendNoResponseBody($request);
     }
 }

@@ -21,7 +21,7 @@ class BackgroundTask
      */
     public function list(array $params = []): array
     {
-        $request = $this->client->newReq('GET', '/api/v1/background-tasks');
+        $request = $this->client->newReq('GET', '/v1/background-tasks');
         foreach ($params as $key => $value) {
             $request->setQueryParam($key, $value);
         }
@@ -37,7 +37,7 @@ class BackgroundTask
      */
     public function get(string $id): array
     {
-        $request = $this->client->newReq('GET', "/api/v1/background-tasks/{$id}");
+        $request = $this->client->newReq('GET', "/v1/background-tasks/{$id}");
         $res = $this->client->send($request);
 
         return json_decode($res, true);
@@ -50,7 +50,7 @@ class BackgroundTask
      */
     public function cancel(string $id): array
     {
-        $request = $this->client->newReq('PUT', "/api/v1/background-tasks/{$id}");
+        $request = $this->client->newReq('PUT', "/v1/background-tasks/{$id}");
         $res = $this->client->send($request);
 
         return json_decode($res, true);

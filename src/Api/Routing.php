@@ -21,7 +21,7 @@ class Routing
      */
     public function get(string $endpointId): array
     {
-        $request = $this->client->newReq('GET', "/api/v1/routing/{$endpointId}/routing");
+        $request = $this->client->newReq('GET', "/v1/routing/{$endpointId}/routing");
         $res = $this->client->send($request);
 
         return json_decode($res, true);
@@ -34,7 +34,7 @@ class Routing
      */
     public function update(string $endpointId, array $body): array
     {
-        $request = $this->client->newReq('PUT', "/api/v1/routing/{$endpointId}/routing");
+        $request = $this->client->newReq('PUT', "/v1/routing/{$endpointId}/routing");
         $request->setBody(json_encode($body));
         $res = $this->client->send($request);
 
@@ -48,7 +48,7 @@ class Routing
      */
     public function getHealth(string $endpointId): array
     {
-        $request = $this->client->newReq('GET', "/api/v1/routing/{$endpointId}/health");
+        $request = $this->client->newReq('GET', "/v1/routing/{$endpointId}/health");
         $res = $this->client->send($request);
 
         return json_decode($res, true);

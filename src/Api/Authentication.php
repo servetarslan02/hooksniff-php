@@ -21,7 +21,7 @@ class Authentication
      */
     public function register(array $body): array
     {
-        $request = $this->client->newReq('POST', '/api/v1/auth/register');
+        $request = $this->client->newReq('POST', '/v1/auth/register');
         $request->setBody(json_encode($body));
         $res = $this->client->send($request);
 
@@ -35,7 +35,7 @@ class Authentication
      */
     public function login(array $body): array
     {
-        $request = $this->client->newReq('POST', '/api/v1/auth/login');
+        $request = $this->client->newReq('POST', '/v1/auth/login');
         $request->setBody(json_encode($body));
         $res = $this->client->send($request);
 
@@ -49,7 +49,7 @@ class Authentication
      */
     public function logout(): void
     {
-        $request = $this->client->newReq('POST', '/api/v1/auth/logout');
+        $request = $this->client->newReq('POST', '/v1/auth/logout');
         $this->client->sendNoResponseBody($request);
     }
 
@@ -60,7 +60,7 @@ class Authentication
      */
     public function getMe(): array
     {
-        $request = $this->client->newReq('GET', '/api/v1/auth/me');
+        $request = $this->client->newReq('GET', '/v1/auth/me');
         $res = $this->client->send($request);
 
         return json_decode($res, true);
@@ -73,7 +73,7 @@ class Authentication
      */
     public function updateProfile(array $body): array
     {
-        $request = $this->client->newReq('PUT', '/api/v1/auth/profile');
+        $request = $this->client->newReq('PUT', '/v1/auth/profile');
         $request->setBody(json_encode($body));
         $res = $this->client->send($request);
 
@@ -87,7 +87,7 @@ class Authentication
      */
     public function changePassword(array $body): void
     {
-        $request = $this->client->newReq('PUT', '/api/v1/auth/password');
+        $request = $this->client->newReq('PUT', '/v1/auth/password');
         $request->setBody(json_encode($body));
         $this->client->sendNoResponseBody($request);
     }
@@ -99,7 +99,7 @@ class Authentication
      */
     public function forgotPassword(array $body): array
     {
-        $request = $this->client->newReq('POST', '/api/v1/auth/forgot-password');
+        $request = $this->client->newReq('POST', '/v1/auth/forgot-password');
         $request->setBody(json_encode($body));
         $res = $this->client->send($request);
 
@@ -113,7 +113,7 @@ class Authentication
      */
     public function resetPassword(array $body): array
     {
-        $request = $this->client->newReq('POST', '/api/v1/auth/reset-password');
+        $request = $this->client->newReq('POST', '/v1/auth/reset-password');
         $request->setBody(json_encode($body));
         $res = $this->client->send($request);
 
@@ -127,7 +127,7 @@ class Authentication
      */
     public function verifyEmail(array $body): array
     {
-        $request = $this->client->newReq('POST', '/api/v1/auth/verify-email');
+        $request = $this->client->newReq('POST', '/v1/auth/verify-email');
         $request->setBody(json_encode($body));
         $res = $this->client->send($request);
 
@@ -141,7 +141,7 @@ class Authentication
      */
     public function resendVerification(array $body): array
     {
-        $request = $this->client->newReq('POST', '/api/v1/auth/resend-verification');
+        $request = $this->client->newReq('POST', '/v1/auth/resend-verification');
         $request->setBody(json_encode($body));
         $res = $this->client->send($request);
 
@@ -155,7 +155,7 @@ class Authentication
      */
     public function refreshToken(): array
     {
-        $request = $this->client->newReq('POST', '/api/v1/auth/refresh');
+        $request = $this->client->newReq('POST', '/v1/auth/refresh');
         $res = $this->client->send($request);
 
         return json_decode($res, true);
@@ -168,7 +168,7 @@ class Authentication
      */
     public function enable2fa(): array
     {
-        $request = $this->client->newReq('POST', '/api/v1/auth/2fa/enable');
+        $request = $this->client->newReq('POST', '/v1/auth/2fa/enable');
         $res = $this->client->send($request);
 
         return json_decode($res, true);
@@ -181,7 +181,7 @@ class Authentication
      */
     public function confirm2fa(array $body): array
     {
-        $request = $this->client->newReq('POST', '/api/v1/auth/2fa/confirm');
+        $request = $this->client->newReq('POST', '/v1/auth/2fa/confirm');
         $request->setBody(json_encode($body));
         $res = $this->client->send($request);
 
@@ -195,7 +195,7 @@ class Authentication
      */
     public function disable2fa(array $body): void
     {
-        $request = $this->client->newReq('POST', '/api/v1/auth/2fa/disable');
+        $request = $this->client->newReq('POST', '/v1/auth/2fa/disable');
         $request->setBody(json_encode($body));
         $this->client->sendNoResponseBody($request);
     }
@@ -207,7 +207,7 @@ class Authentication
      */
     public function get2faStatus(): array
     {
-        $request = $this->client->newReq('GET', '/api/v1/auth/2fa/status');
+        $request = $this->client->newReq('GET', '/v1/auth/2fa/status');
         $res = $this->client->send($request);
 
         return json_decode($res, true);
@@ -220,7 +220,7 @@ class Authentication
      */
     public function verify2faLogin(array $body): array
     {
-        $request = $this->client->newReq('POST', '/api/v1/auth/2fa/verify');
+        $request = $this->client->newReq('POST', '/v1/auth/2fa/verify');
         $request->setBody(json_encode($body));
         $res = $this->client->send($request);
 
@@ -234,7 +234,7 @@ class Authentication
      */
     public function revokeToken(): void
     {
-        $request = $this->client->newReq('POST', '/api/v1/auth/revoke-token');
+        $request = $this->client->newReq('POST', '/v1/auth/revoke-token');
         $this->client->sendNoResponseBody($request);
     }
 
@@ -245,7 +245,7 @@ class Authentication
      */
     public function revokeAllTokens(): void
     {
-        $request = $this->client->newReq('POST', '/api/v1/auth/revoke-all-tokens');
+        $request = $this->client->newReq('POST', '/v1/auth/revoke-all-tokens');
         $this->client->sendNoResponseBody($request);
     }
 
@@ -256,7 +256,7 @@ class Authentication
      */
     public function getConsent(): array
     {
-        $request = $this->client->newReq('GET', '/api/v1/auth/consent');
+        $request = $this->client->newReq('GET', '/v1/auth/consent');
         $res = $this->client->send($request);
 
         return json_decode($res, true);
@@ -269,7 +269,7 @@ class Authentication
      */
     public function updateConsent(array $body): array
     {
-        $request = $this->client->newReq('POST', '/api/v1/auth/consent');
+        $request = $this->client->newReq('POST', '/v1/auth/consent');
         $request->setBody(json_encode($body));
         $res = $this->client->send($request);
 
@@ -283,7 +283,7 @@ class Authentication
      */
     public function exportData(): array
     {
-        $request = $this->client->newReq('GET', '/api/v1/auth/export');
+        $request = $this->client->newReq('GET', '/v1/auth/export');
         $res = $this->client->send($request);
 
         return json_decode($res, true);
@@ -296,7 +296,7 @@ class Authentication
      */
     public function deleteAccount(array $body): void
     {
-        $request = $this->client->newReq('DELETE', '/api/v1/auth/account');
+        $request = $this->client->newReq('DELETE', '/v1/auth/account');
         $request->setBody(json_encode($body));
         $this->client->sendNoResponseBody($request);
     }

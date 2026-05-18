@@ -21,7 +21,7 @@ class Alert
      */
     public function list(): array
     {
-        $request = $this->client->newReq('GET', '/api/v1/alerts');
+        $request = $this->client->newReq('GET', '/v1/alerts');
         $res = $this->client->send($request);
 
         return json_decode($res, true);
@@ -34,7 +34,7 @@ class Alert
      */
     public function create(array $body): array
     {
-        $request = $this->client->newReq('POST', '/api/v1/alerts');
+        $request = $this->client->newReq('POST', '/v1/alerts');
         $request->setBody(json_encode($body));
         $res = $this->client->send($request);
 
@@ -48,7 +48,7 @@ class Alert
      */
     public function get(string $id): array
     {
-        $request = $this->client->newReq('GET', "/api/v1/alerts/{$id}");
+        $request = $this->client->newReq('GET', "/v1/alerts/{$id}");
         $res = $this->client->send($request);
 
         return json_decode($res, true);
@@ -61,7 +61,7 @@ class Alert
      */
     public function update(string $id, array $body): array
     {
-        $request = $this->client->newReq('PUT', "/api/v1/alerts/{$id}");
+        $request = $this->client->newReq('PUT', "/v1/alerts/{$id}");
         $request->setBody(json_encode($body));
         $res = $this->client->send($request);
 
@@ -75,7 +75,7 @@ class Alert
      */
     public function delete(string $id): void
     {
-        $request = $this->client->newReq('DELETE', "/api/v1/alerts/{$id}");
+        $request = $this->client->newReq('DELETE', "/v1/alerts/{$id}");
         $this->client->sendNoResponseBody($request);
     }
 
@@ -86,7 +86,7 @@ class Alert
      */
     public function test(string $id): array
     {
-        $request = $this->client->newReq('POST', "/api/v1/alerts/{$id}/test");
+        $request = $this->client->newReq('POST', "/v1/alerts/{$id}/test");
         $res = $this->client->send($request);
 
         return json_decode($res, true);

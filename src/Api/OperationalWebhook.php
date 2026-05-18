@@ -21,7 +21,7 @@ class OperationalWebhook
      */
     public function list(): array
     {
-        $request = $this->client->newReq('GET', '/api/v1/operational-webhooks');
+        $request = $this->client->newReq('GET', '/v1/operational-webhooks');
         $res = $this->client->send($request);
 
         return json_decode($res, true);
@@ -34,7 +34,7 @@ class OperationalWebhook
      */
     public function create(array $body): array
     {
-        $request = $this->client->newReq('POST', '/api/v1/operational-webhooks');
+        $request = $this->client->newReq('POST', '/v1/operational-webhooks');
         $request->setBody(json_encode($body));
         $res = $this->client->send($request);
 
@@ -48,7 +48,7 @@ class OperationalWebhook
      */
     public function get(string $id): array
     {
-        $request = $this->client->newReq('GET', "/api/v1/operational-webhooks/{$id}");
+        $request = $this->client->newReq('GET', "/v1/operational-webhooks/{$id}");
         $res = $this->client->send($request);
 
         return json_decode($res, true);
@@ -61,7 +61,7 @@ class OperationalWebhook
      */
     public function update(string $id, array $body): array
     {
-        $request = $this->client->newReq('PUT', "/api/v1/operational-webhooks/{$id}");
+        $request = $this->client->newReq('PUT', "/v1/operational-webhooks/{$id}");
         $request->setBody(json_encode($body));
         $res = $this->client->send($request);
 
@@ -75,7 +75,7 @@ class OperationalWebhook
      */
     public function delete(string $id): void
     {
-        $request = $this->client->newReq('DELETE', "/api/v1/operational-webhooks/{$id}");
+        $request = $this->client->newReq('DELETE', "/v1/operational-webhooks/{$id}");
         $this->client->sendNoResponseBody($request);
     }
 
@@ -86,7 +86,7 @@ class OperationalWebhook
      */
     public function listDeliveries(string $id, array $params = []): array
     {
-        $request = $this->client->newReq('GET', "/api/v1/operational-webhooks/{$id}/deliveries");
+        $request = $this->client->newReq('GET', "/v1/operational-webhooks/{$id}/deliveries");
         foreach ($params as $key => $value) {
             $request->setQueryParam($key, $value);
         }

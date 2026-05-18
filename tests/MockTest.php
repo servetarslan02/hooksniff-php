@@ -1030,7 +1030,7 @@ class MockTest extends TestCase
 
         $req = $this->requestHistory[0]['request'];
         $this->assertEquals('GET', $req->getMethod());
-        $this->assertStringContainsString('/api/v1/health', (string) $req->getUri());
+        $this->assertStringContainsString('/v1/health', (string) $req->getUri());
     }
 
     // ── Statistics ──────────────────────────────────────────

@@ -21,7 +21,7 @@ class Billing
      */
     public function getSubscription(): array
     {
-        $request = $this->client->newReq('GET', '/api/v1/billing/subscription');
+        $request = $this->client->newReq('GET', '/v1/billing/subscription');
         $res = $this->client->send($request);
 
         return json_decode($res, true);
@@ -34,7 +34,7 @@ class Billing
      */
     public function cancelSubscription(): void
     {
-        $request = $this->client->newReq('DELETE', '/api/v1/billing/subscription');
+        $request = $this->client->newReq('DELETE', '/v1/billing/subscription');
         $this->client->sendNoResponseBody($request);
     }
 
@@ -45,7 +45,7 @@ class Billing
      */
     public function upgrade(array $body): array
     {
-        $request = $this->client->newReq('POST', '/api/v1/billing/upgrade');
+        $request = $this->client->newReq('POST', '/v1/billing/upgrade');
         $request->setBody(json_encode($body));
         $res = $this->client->send($request);
 
@@ -59,7 +59,7 @@ class Billing
      */
     public function openPortal(): array
     {
-        $request = $this->client->newReq('POST', '/api/v1/billing/portal');
+        $request = $this->client->newReq('POST', '/v1/billing/portal');
         $res = $this->client->send($request);
 
         return json_decode($res, true);
@@ -72,7 +72,7 @@ class Billing
      */
     public function getUsage(): array
     {
-        $request = $this->client->newReq('GET', '/api/v1/billing/usage');
+        $request = $this->client->newReq('GET', '/v1/billing/usage');
         $res = $this->client->send($request);
 
         return json_decode($res, true);
@@ -85,7 +85,7 @@ class Billing
      */
     public function getInvoices(): array
     {
-        $request = $this->client->newReq('GET', '/api/v1/billing/invoices');
+        $request = $this->client->newReq('GET', '/v1/billing/invoices');
         $res = $this->client->send($request);
 
         return json_decode($res, true);
@@ -98,7 +98,7 @@ class Billing
      */
     public function requestRefund(array $body): array
     {
-        $request = $this->client->newReq('POST', '/api/v1/billing/refund');
+        $request = $this->client->newReq('POST', '/v1/billing/refund');
         $request->setBody(json_encode($body));
         $res = $this->client->send($request);
 
@@ -112,7 +112,7 @@ class Billing
      */
     public function getOverageSettings(): array
     {
-        $request = $this->client->newReq('GET', '/api/v1/billing/settings');
+        $request = $this->client->newReq('GET', '/v1/billing/settings');
         $res = $this->client->send($request);
 
         return json_decode($res, true);
@@ -125,7 +125,7 @@ class Billing
      */
     public function updateOverageSettings(array $body): array
     {
-        $request = $this->client->newReq('PUT', '/api/v1/billing/settings');
+        $request = $this->client->newReq('PUT', '/v1/billing/settings');
         $request->setBody(json_encode($body));
         $res = $this->client->send($request);
 

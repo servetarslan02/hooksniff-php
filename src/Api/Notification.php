@@ -21,7 +21,7 @@ class Notification
      */
     public function list(array $params = []): array
     {
-        $request = $this->client->newReq('GET', '/api/v1/notifications');
+        $request = $this->client->newReq('GET', '/v1/notifications');
         foreach ($params as $key => $value) {
             $request->setQueryParam($key, $value);
         }
@@ -37,7 +37,7 @@ class Notification
      */
     public function unreadCount(): array
     {
-        $request = $this->client->newReq('GET', '/api/v1/notifications/unread-count');
+        $request = $this->client->newReq('GET', '/v1/notifications/unread-count');
         $res = $this->client->send($request);
 
         return json_decode($res, true);
@@ -50,7 +50,7 @@ class Notification
      */
     public function markAllRead(): void
     {
-        $request = $this->client->newReq('PUT', '/api/v1/notifications/read-all');
+        $request = $this->client->newReq('PUT', '/v1/notifications/read-all');
         $this->client->sendNoResponseBody($request);
     }
 
@@ -61,7 +61,7 @@ class Notification
      */
     public function markRead(string $id): void
     {
-        $request = $this->client->newReq('PUT', "/api/v1/notifications/{$id}/read");
+        $request = $this->client->newReq('PUT', "/v1/notifications/{$id}/read");
         $this->client->sendNoResponseBody($request);
     }
 
@@ -72,7 +72,7 @@ class Notification
      */
     public function delete(string $id): void
     {
-        $request = $this->client->newReq('DELETE', "/api/v1/notifications/{$id}");
+        $request = $this->client->newReq('DELETE', "/v1/notifications/{$id}");
         $this->client->sendNoResponseBody($request);
     }
 }

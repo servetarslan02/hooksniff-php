@@ -21,7 +21,7 @@ class Transform
      */
     public function list(): array
     {
-        $request = $this->client->newReq('GET', '/api/v1/transforms');
+        $request = $this->client->newReq('GET', '/v1/transforms');
         $res = $this->client->send($request);
 
         return json_decode($res, true);
@@ -34,7 +34,7 @@ class Transform
      */
     public function create(array $body): array
     {
-        $request = $this->client->newReq('POST', '/api/v1/transforms');
+        $request = $this->client->newReq('POST', '/v1/transforms');
         $request->setBody(json_encode($body));
         $res = $this->client->send($request);
 
@@ -48,7 +48,7 @@ class Transform
      */
     public function update(string $id, array $body): array
     {
-        $request = $this->client->newReq('PUT', "/api/v1/transforms/{$id}");
+        $request = $this->client->newReq('PUT', "/v1/transforms/{$id}");
         $request->setBody(json_encode($body));
         $res = $this->client->send($request);
 
@@ -62,7 +62,7 @@ class Transform
      */
     public function delete(string $id): void
     {
-        $request = $this->client->newReq('DELETE', "/api/v1/transforms/{$id}");
+        $request = $this->client->newReq('DELETE', "/v1/transforms/{$id}");
         $this->client->sendNoResponseBody($request);
     }
 
@@ -73,7 +73,7 @@ class Transform
      */
     public function test(array $body): array
     {
-        $request = $this->client->newReq('POST', '/api/v1/transforms/test');
+        $request = $this->client->newReq('POST', '/v1/transforms/test');
         $request->setBody(json_encode($body));
         $res = $this->client->send($request);
 

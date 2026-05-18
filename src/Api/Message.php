@@ -26,7 +26,7 @@ class Message
         ?string $appId = null,
         ?MessageListOptions $options = null,
     ): ListResponseMessageOut {
-        $path = $appId !== null ? "/api/v1/app/{$appId}/msg" : '/api/v1/msg';
+        $path = $appId !== null ? "/v1/webhooks" : '/v1/msg';
         $request = $this->client->newReq('GET', $path);
         if (null !== $options) {
             $request->setQueryParam('limit', $options->limit);
@@ -53,7 +53,7 @@ class Message
         ?string $appId = null,
         ?MessageCreateOptions $options = null,
     ): MessageOut {
-        $path = $appId !== null ? "/api/v1/app/{$appId}/msg" : '/api/v1/msg';
+        $path = $appId !== null ? "/v1/webhooks" : '/v1/msg';
         $request = $this->client->newReq('POST', $path);
         if (null !== $options) {
             $request->setQueryParam('with_content', $options->withContent);
@@ -75,7 +75,7 @@ class Message
         ?string $appId = null,
         ?MessageGetOptions $options = null,
     ): MessageOut {
-        $path = $appId !== null ? "/api/v1/app/{$appId}/msg/{$msgId}" : "/api/v1/msg/{$msgId}";
+        $path = $appId !== null ? "/v1/webhooks/{$msgId}" : "/v1/msg/{$msgId}";
         $request = $this->client->newReq('GET', $path);
         if (null !== $options) {
             $request->setQueryParam('with_content', $options->withContent);

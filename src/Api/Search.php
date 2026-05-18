@@ -21,7 +21,7 @@ class Search
      */
     public function search(array $params = []): array
     {
-        $request = $this->client->newReq('GET', '/api/v1/search');
+        $request = $this->client->newReq('GET', '/v1/search');
         foreach ($params as $key => $value) {
             $request->setQueryParam($key, $value);
         }

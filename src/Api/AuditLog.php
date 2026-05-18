@@ -21,7 +21,7 @@ class AuditLog
      */
     public function list(array $params = []): array
     {
-        $request = $this->client->newReq('GET', '/api/v1/audit-log');
+        $request = $this->client->newReq('GET', '/v1/audit-log');
         foreach ($params as $key => $value) {
             $request->setQueryParam($key, $value);
         }
@@ -37,7 +37,7 @@ class AuditLog
      */
     public function get(string $id): array
     {
-        $request = $this->client->newReq('GET', "/api/v1/audit-log/{$id}");
+        $request = $this->client->newReq('GET', "/v1/audit-log/{$id}");
         $res = $this->client->send($request);
 
         return json_decode($res, true);

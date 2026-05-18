@@ -21,7 +21,7 @@ class Statistics
      */
     public function aggregateAppStats(): array
     {
-        $request = $this->client->newReq('GET', '/api/v1/stats/usage/app');
+        $request = $this->client->newReq('GET', '/v1/stats/usage/app');
         $res = $this->client->send($request);
 
         return json_decode($res, true);

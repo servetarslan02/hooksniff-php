@@ -21,7 +21,7 @@ class CustomDomain
      */
     public function list(): array
     {
-        $request = $this->client->newReq('GET', '/api/v1/custom-domains');
+        $request = $this->client->newReq('GET', '/v1/custom-domains');
         $res = $this->client->send($request);
 
         return json_decode($res, true);
@@ -34,7 +34,7 @@ class CustomDomain
      */
     public function add(array $body): array
     {
-        $request = $this->client->newReq('POST', '/api/v1/custom-domains');
+        $request = $this->client->newReq('POST', '/v1/custom-domains');
         $request->setBody(json_encode($body));
         $res = $this->client->send($request);
 
@@ -48,7 +48,7 @@ class CustomDomain
      */
     public function delete(string $id): void
     {
-        $request = $this->client->newReq('DELETE', "/api/v1/custom-domains/{$id}");
+        $request = $this->client->newReq('DELETE', "/v1/custom-domains/{$id}");
         $this->client->sendNoResponseBody($request);
     }
 
@@ -59,7 +59,7 @@ class CustomDomain
      */
     public function verify(string $id): array
     {
-        $request = $this->client->newReq('POST', "/api/v1/custom-domains/{$id}/verify");
+        $request = $this->client->newReq('POST', "/v1/custom-domains/{$id}/verify");
         $res = $this->client->send($request);
 
         return json_decode($res, true);

@@ -21,7 +21,7 @@ class Stream
      */
     public function listChannels(): array
     {
-        $request = $this->client->newReq('GET', '/api/v1/stream/channels');
+        $request = $this->client->newReq('GET', '/v1/stream/channels');
         $res = $this->client->send($request);
 
         return json_decode($res, true);
@@ -34,7 +34,7 @@ class Stream
      */
     public function getChannel(string $id): array
     {
-        $request = $this->client->newReq('GET', "/api/v1/stream/channels/{$id}");
+        $request = $this->client->newReq('GET', "/v1/stream/channels/{$id}");
         $res = $this->client->send($request);
 
         return json_decode($res, true);
@@ -47,7 +47,7 @@ class Stream
      */
     public function createChannel(array $body): array
     {
-        $request = $this->client->newReq('POST', '/api/v1/stream/channels');
+        $request = $this->client->newReq('POST', '/v1/stream/channels');
         $request->setBody(json_encode($body));
         $res = $this->client->send($request);
 
@@ -61,7 +61,7 @@ class Stream
      */
     public function updateChannel(string $id, array $body): array
     {
-        $request = $this->client->newReq('PUT', "/api/v1/stream/channels/{$id}");
+        $request = $this->client->newReq('PUT', "/v1/stream/channels/{$id}");
         $request->setBody(json_encode($body));
         $res = $this->client->send($request);
 
@@ -75,7 +75,7 @@ class Stream
      */
     public function deleteChannel(string $id): void
     {
-        $request = $this->client->newReq('DELETE', "/api/v1/stream/channels/{$id}");
+        $request = $this->client->newReq('DELETE', "/v1/stream/channels/{$id}");
         $this->client->sendNoResponseBody($request);
     }
 
@@ -86,7 +86,7 @@ class Stream
      */
     public function listMessages(string $id, array $params = []): array
     {
-        $request = $this->client->newReq('GET', "/api/v1/stream/channels/{$id}/messages");
+        $request = $this->client->newReq('GET', "/v1/stream/channels/{$id}/messages");
         foreach ($params as $key => $value) {
             $request->setQueryParam($key, $value);
         }
@@ -102,7 +102,7 @@ class Stream
      */
     public function listSubscriptions(): array
     {
-        $request = $this->client->newReq('GET', '/api/v1/stream/subscriptions');
+        $request = $this->client->newReq('GET', '/v1/stream/subscriptions');
         $res = $this->client->send($request);
 
         return json_decode($res, true);
@@ -115,7 +115,7 @@ class Stream
      */
     public function disconnectSubscription(string $id): void
     {
-        $request = $this->client->newReq('DELETE', "/api/v1/stream/subscriptions/{$id}");
+        $request = $this->client->newReq('DELETE', "/v1/stream/subscriptions/{$id}");
         $this->client->sendNoResponseBody($request);
     }
 
@@ -126,7 +126,7 @@ class Stream
      */
     public function publish(array $body): array
     {
-        $request = $this->client->newReq('POST', '/api/v1/stream/publish');
+        $request = $this->client->newReq('POST', '/v1/stream/publish');
         $request->setBody(json_encode($body));
         $res = $this->client->send($request);
 

@@ -21,7 +21,7 @@ class Application
      */
     public function list(array $params = []): array
     {
-        $request = $this->client->newReq('GET', '/api/v1/applications');
+        $request = $this->client->newReq('GET', '/v1/applications');
         foreach ($params as $key => $value) {
             $request->setQueryParam($key, $value);
         }
@@ -37,7 +37,7 @@ class Application
      */
     public function create(array $body): array
     {
-        $request = $this->client->newReq('POST', '/api/v1/applications');
+        $request = $this->client->newReq('POST', '/v1/applications');
         $request->setBody(json_encode($body));
         $res = $this->client->send($request);
 
@@ -51,7 +51,7 @@ class Application
      */
     public function get(string $id): array
     {
-        $request = $this->client->newReq('GET', "/api/v1/applications/{$id}");
+        $request = $this->client->newReq('GET', "/v1/applications/{$id}");
         $res = $this->client->send($request);
 
         return json_decode($res, true);
@@ -64,7 +64,7 @@ class Application
      */
     public function update(string $id, array $body): array
     {
-        $request = $this->client->newReq('PUT', "/api/v1/applications/{$id}");
+        $request = $this->client->newReq('PUT', "/v1/applications/{$id}");
         $request->setBody(json_encode($body));
         $res = $this->client->send($request);
 
@@ -78,7 +78,7 @@ class Application
      */
     public function delete(string $id): void
     {
-        $request = $this->client->newReq('DELETE', "/api/v1/applications/{$id}");
+        $request = $this->client->newReq('DELETE', "/v1/applications/{$id}");
         $this->client->sendNoResponseBody($request);
     }
 }
