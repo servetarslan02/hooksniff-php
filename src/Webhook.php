@@ -24,6 +24,14 @@ class Webhook
     }
 
     /**
+     * Verify and parse a webhook payload.
+     *
+     * Verifies the HMAC-SHA256 signature, then parses the payload
+     * into a typed WebhookEvent with `event`, `data`, and `timestamp`.
+     *
+     * @param string $payload Raw request body
+     * @param array $headers Request headers containing hooksniff-id, hooksniff-timestamp, hooksniff-signature
+     * @return WebhookEvent Parsed webhook event
      * @throws Exception\WebhookVerificationException
      * @throws Exception\WebhookSigningException
      */
@@ -49,6 +57,65 @@ class Webhook
             throw new Exception\WebhookVerificationException("Missing required headers");
         }
 
+
+        $timestamp = $this->verifyTimestamp($msgTimestamp);
+
+        $signature = $this->sign($msgId, $timestamp, $payload);
+        $expectedSignature = explode(',', $signature, 2)[1];
+
+        $passedSignatures = explode(' ', $msgSignature);
+        foreach ($passedSignatures as $versionedSignature) {
+            $sigParts = explode(',', $versionedSignature, 2);
+
+            if (count($sigParts) != 2) {
+                continue;
+            }
+
+            $version = $sigParts[0];
+            $passedSignature = $sigParts[1];
+
+            if (strcmp($version, "v1") != 0) {
+                continue;
+            }
+
+            if (hash_equals($expectedSignature, $passedSignature)) {
+                return $this->parsePayload($payload);
+            }
+        }
+        throw new Exception\WebhookVerificationException("No matching signature found");
+    }
+
+    /**
+     * Verify and return raw payload without parsing.
+     * Use this when you need the raw array instead of a typed event.
+     *
+     * @param string $payload Raw request body
+     * @param array $headers Request headers
+     * @return array|null Parsed JSON array
+     * @throws Exception\WebhookVerificationException
+     * @throws Exception\WebhookSigningException
+     */
+    public function verifyRaw($payload, $headers)
+    {
+        if (
+            isset($headers['hooksniff-id'])
+            && isset($headers['hooksniff-timestamp'])
+            && isset($headers['hooksniff-signature'])
+        ) {
+            $msgId = $headers['hooksniff-id'];
+            $msgTimestamp = $headers['hooksniff-timestamp'];
+            $msgSignature = $headers['hooksniff-signature'];
+        } elseif (
+            isset($headers['webhook-id'])
+            && isset($headers['webhook-timestamp'])
+            && isset($headers['webhook-signature'])
+        ) {
+            $msgId = $headers['webhook-id'];
+            $msgTimestamp = $headers['webhook-timestamp'];
+            $msgSignature = $headers['webhook-signature'];
+        } else {
+            throw new Exception\WebhookVerificationException("Missing required headers");
+        }
 
         $timestamp = $this->verifyTimestamp($msgTimestamp);
 
@@ -110,6 +177,20 @@ class Webhook
             throw new Exception\WebhookVerificationException("Message timestamp too new");
         }
         return $timestamp;
+    }
+
+    private function parsePayload($payload)
+    {
+        if (empty($payload)) {
+            return new WebhookEvent("", [], "");
+        }
+
+        $parsed = json_decode($payload, true);
+        if (!is_array($parsed)) {
+            return new WebhookEvent("", [], "");
+        }
+
+        return WebhookEvent::parse($parsed);
     }
 
     private function isPositiveInteger($v)
