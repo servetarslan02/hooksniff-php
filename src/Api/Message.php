@@ -44,6 +44,30 @@ class Message
     }
 
     /**
+     * Auto-paginate through all messages.
+     *
+     * Returns a Generator that automatically fetches the next page.
+     *
+     * @param string|null $appId Application ID
+     * @param int|null $limit Page size
+     * @return \Generator<MessageOut>
+     *
+     * @example
+     *   foreach ($hs->message->listAll(limit: 100) as $msg) {
+     *       echo $msg->id;
+     *   }
+     */
+    public function listAll(
+        ?string $appId = null,
+        ?int $limit = null,
+    ): \Generator {
+        return \HookSniff\Paginator::paginate(
+            fn($opts) => $this->list($appId, $opts),
+            $limit,
+        );
+    }
+
+    /**
      * Create a new message and dispatch it to all matching endpoints.
      *
      * @throws ApiException
