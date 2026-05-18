@@ -15,7 +15,7 @@ use HookSniff\Version;
 class HookSniffHttpClient
 {
     /** @var int[] Retry schedule in milliseconds - defines sleep time before each retry attempt */
-    private array $retryScheduleMs = [50, 100];
+    private array $retryScheduleMs = [1000, 2000, 4000];
 
     public function __construct(
         private string $baseUrl,
