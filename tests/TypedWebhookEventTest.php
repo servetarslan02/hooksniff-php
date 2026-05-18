@@ -193,4 +193,112 @@ class TypedWebhookEventTest extends TestCase
         $event = WebhookEvent::parse(['event' => 'test', 'data' => []]);
         $this->assertEquals('', $event->getTimestamp());
     }
+
+    public function testUnicodeData()
+    {
+        $event = WebhookEvent::parse([
+            'event' => 'endpoint.created',
+            'data' => ['appId' => 'ünïcödé', 'endpointId' => '日本語'],
+            'timestamp' => '',
+        ]);
+        $data = $event->parseEndpointCreatedData();
+        $this->assertEquals('ünïcödé', $data->appId);
+        $this->assertEquals('日本語', $data->endpointId);
+    }
+
+    public function testLargeData()
+    {
+        $event = WebhookEvent::parse([
+            'event' => 'endpoint.created',
+            'data' => ['appId' => str_repeat('a', 10000), 'endpointId' => str_repeat('e', 10000)],
+            'timestamp' => '',
+        ]);
+        $data = $event->parseEndpointCreatedData();
+        $this->assertEquals(10000, strlen($data->appId));
+    }
+
+    public function testSpecialCharacters()
+    {
+        $event = WebhookEvent::parse([
+            'event' => 'endpoint.created',
+            'data' => ['appId' => 'a@b.c', 'endpointId' => 'e#1'],
+            'timestamp' => '',
+        ]);
+        $data = $event->parseEndpointCreatedData();
+        $this->assertEquals('a@b.c', $data->appId);
+    }
+
+    public function testTriggerNone()
+    {
+        $event = WebhookEvent::parse([
+            'event' => 'endpoint.disabled',
+            'data' => ['appId' => 'a', 'endpointId' => 'e', 'trigger' => 'none'],
+            'timestamp' => '',
+        ]);
+        $data = $event->parseEndpointDisabledData();
+        $this->assertEquals('none', $data->trigger);
+    }
+
+    public function testTriggerFirstFailure()
+    {
+        $event = WebhookEvent::parse([
+            'event' => 'endpoint.disabled',
+            'data' => ['appId' => 'a', 'endpointId' => 'e', 'trigger' => 'first-failure'],
+            'timestamp' => '',
+        ]);
+        $data = $event->parseEndpointDisabledData();
+        $this->assertEquals('first-failure', $data->trigger);
+    }
+
+    public function testFailSince()
+    {
+        $event = WebhookEvent::parse([
+            'event' => 'endpoint.disabled',
+            'data' => ['appId' => 'a', 'endpointId' => 'e', 'failSince' => '2026-01'],
+            'timestamp' => '',
+        ]);
+        $data = $event->parseEndpointDisabledData();
+        $this->assertEquals('2026-01', $data->failSince);
+    }
+
+    public function testAllEndpointTypes()
+    {
+        $types = ['endpoint.created', 'endpoint.updated', 'endpoint.deleted', 'endpoint.enabled', 'endpoint.disabled'];
+        foreach ($types as $type) {
+            $event = WebhookEvent::parse(['event' => $type, 'data' => ['appId' => 'a'], 'timestamp' => '']);
+            $this->assertEquals($type, $event->getEvent());
+        }
+    }
+
+    public function testGetExistingKey()
+    {
+        $event = WebhookEvent::parse(['event' => 'test', 'data' => ['x' => 1], 'timestamp' => '']);
+        $this->assertEquals(1, $event->get('x'));
+    }
+
+    public function testGetMissingKey()
+    {
+        $event = WebhookEvent::parse(['event' => 'test', 'data' => ['x' => 1], 'timestamp' => '']);
+        $this->assertNull($event->get('missing'));
+    }
+
+    public function testMagicGet()
+    {
+        $event = WebhookEvent::parse(['event' => 'test', 'data' => ['x' => 1], 'timestamp' => '']);
+        $this->assertEquals(1, $event->x);
+    }
+
+    public function testMagicIsset()
+    {
+        $event = WebhookEvent::parse(['event' => 'test', 'data' => ['x' => 1], 'timestamp' => '']);
+        $this->assertTrue(isset($event->x));
+        $this->assertFalse(isset($event->missing));
+    }
+
+    public function testToString()
+    {
+        $event = WebhookEvent::parse(['event' => 'endpoint.created', 'data' => [], 'timestamp' => '2026-05-19']);
+        $this->assertStringContainsString('endpoint.created', (string)$event);
+        $this->assertStringContainsString('2026-05-19', (string)$event);
+    }
 }
