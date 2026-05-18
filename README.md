@@ -156,7 +156,7 @@ See [EXAMPLES.md](EXAMPLES.md) for detailed usage examples covering all 35 resou
 ## Links
 
 - [Documentation](https://hooksniff.vercel.app/docs)
-- [API Reference](https://hooksniff.vercel.app/docs/api)
+- [API Reference](https://hooksniff.vercel.app/docs)
 - [GitHub](https://github.com/servetarslan02/hooksniff-php)
 - [Packagist](https://packagist.org/packages/hooksniff/hooksniff)
 
