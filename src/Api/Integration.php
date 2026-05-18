@@ -1,55 +1,123 @@
 <?php
 
+declare(strict_types=1);
+
 namespace HookSniff\Api;
 
-use HookSniff\HookSniffHttpClient;
+use HookSniff\Exception\ApiException;
+use HookSniff\Request\HookSniffHttpClient;
 
 class Integration
 {
-    private HookSniffHttpClient $client;
-
-    public function __construct(HookSniffHttpClient $client)
-    {
-        $this->client = $client;
+    public function __construct(
+        private readonly HookSniffHttpClient $client,
+    ) {
     }
 
+    /**
+     * List all integrations.
+     *
+     * @throws ApiException
+     */
     public function list(): array
     {
-        return $this->client->request('GET', '/api/v1/integrations');
+        $request = $this->client->newReq('GET', '/api/v1/integrations');
+        $res = $this->client->send($request);
+
+        return json_decode($res, true);
     }
 
+    /**
+     * Get an integration by ID.
+     *
+     * @throws ApiException
+     */
     public function get(string $id): array
     {
-        return $this->client->request('GET', "/api/v1/integrations/{$id}");
+        $request = $this->client->newReq('GET', "/api/v1/integrations/{$id}");
+        $res = $this->client->send($request);
+
+        return json_decode($res, true);
     }
 
+    /**
+     * Create a new integration.
+     *
+     * @throws ApiException
+     */
     public function create(array $body): array
     {
-        return $this->client->request('POST', '/api/v1/integrations', $body);
+        $request = $this->client->newReq('POST', '/api/v1/integrations');
+        $request->setBody(json_encode($body));
+        $res = $this->client->send($request);
+
+        return json_decode($res, true);
     }
 
+    /**
+     * Update an integration.
+     *
+     * @throws ApiException
+     */
     public function update(string $id, array $body): array
     {
-        return $this->client->request('PUT', "/api/v1/integrations/{$id}", $body);
+        $request = $this->client->newReq('PUT', "/api/v1/integrations/{$id}");
+        $request->setBody(json_encode($body));
+        $res = $this->client->send($request);
+
+        return json_decode($res, true);
     }
 
+    /**
+     * Delete an integration.
+     *
+     * @throws ApiException
+     */
     public function delete(string $id): void
     {
-        $this->client->request('DELETE', "/api/v1/integrations/{$id}");
+        $request = $this->client->newReq('DELETE', "/api/v1/integrations/{$id}");
+        $this->client->sendNoResponseBody($request);
     }
 
+    /**
+     * Test an integration.
+     *
+     * @throws ApiException
+     */
     public function test(string $id): array
     {
-        return $this->client->request('POST', "/api/v1/integrations/{$id}/test");
+        $request = $this->client->newReq('POST', "/api/v1/integrations/{$id}/test");
+        $res = $this->client->send($request);
+
+        return json_decode($res, true);
     }
 
+    /**
+     * List events for an integration.
+     *
+     * @throws ApiException
+     */
     public function listEvents(string $id, array $params = []): array
     {
-        return $this->client->request('GET', "/api/v1/integrations/{$id}/events", null, $params);
+        $request = $this->client->newReq('GET', "/api/v1/integrations/{$id}/events");
+        foreach ($params as $key => $value) {
+            $request->setQueryParam($key, $value);
+        }
+        $res = $this->client->send($request);
+
+        return json_decode($res, true);
     }
 
+    /**
+     * Get stats for an integration.
+     *
+     * @throws ApiException
+     */
     public function getStats(string $id): array
     {
-        return $this->client->request('GET', "/api/v1/integrations/{$id}/stats");
+        $request = $this->client->newReq('GET', "/api/v1/integrations/{$id}/stats");
+        $res = $this->client->send($request);
+
+        return json_decode($res, true);
     }
 }

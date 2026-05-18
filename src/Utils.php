@@ -131,7 +131,7 @@ class Utils
      */
     static function getServerUrlFromToken(string $token): string
     {
-        return 'https://api.hooksniff-1046140057667.europe-west1.run.app';
+        return 'https://hooksniff-api-1046140057667.europe-west1.run.app';
     }
 
 

@@ -1,60 +1,135 @@
 <?php
 
+declare(strict_types=1);
+
 namespace HookSniff\Api;
 
-use HookSniff\HookSniffHttpClient;
+use HookSniff\Exception\ApiException;
+use HookSniff\Request\HookSniffHttpClient;
 
 class Stream
 {
-    private HookSniffHttpClient $client;
-
-    public function __construct(HookSniffHttpClient $client)
-    {
-        $this->client = $client;
+    public function __construct(
+        private readonly HookSniffHttpClient $client,
+    ) {
     }
 
+    /**
+     * List all stream channels.
+     *
+     * @throws ApiException
+     */
     public function listChannels(): array
     {
-        return $this->client->request('GET', '/api/v1/stream/channels');
+        $request = $this->client->newReq('GET', '/api/v1/stream/channels');
+        $res = $this->client->send($request);
+
+        return json_decode($res, true);
     }
 
+    /**
+     * Get a stream channel by ID.
+     *
+     * @throws ApiException
+     */
     public function getChannel(string $id): array
     {
-        return $this->client->request('GET', "/api/v1/stream/channels/{$id}");
+        $request = $this->client->newReq('GET', "/api/v1/stream/channels/{$id}");
+        $res = $this->client->send($request);
+
+        return json_decode($res, true);
     }
 
+    /**
+     * Create a new stream channel.
+     *
+     * @throws ApiException
+     */
     public function createChannel(array $body): array
     {
-        return $this->client->request('POST', '/api/v1/stream/channels', $body);
+        $request = $this->client->newReq('POST', '/api/v1/stream/channels');
+        $request->setBody(json_encode($body));
+        $res = $this->client->send($request);
+
+        return json_decode($res, true);
     }
 
+    /**
+     * Update a stream channel.
+     *
+     * @throws ApiException
+     */
     public function updateChannel(string $id, array $body): array
     {
-        return $this->client->request('PUT', "/api/v1/stream/channels/{$id}", $body);
+        $request = $this->client->newReq('PUT', "/api/v1/stream/channels/{$id}");
+        $request->setBody(json_encode($body));
+        $res = $this->client->send($request);
+
+        return json_decode($res, true);
     }
 
+    /**
+     * Delete a stream channel.
+     *
+     * @throws ApiException
+     */
     public function deleteChannel(string $id): void
     {
-        $this->client->request('DELETE', "/api/v1/stream/channels/{$id}");
+        $request = $this->client->newReq('DELETE', "/api/v1/stream/channels/{$id}");
+        $this->client->sendNoResponseBody($request);
     }
 
+    /**
+     * List messages in a stream channel.
+     *
+     * @throws ApiException
+     */
     public function listMessages(string $id, array $params = []): array
     {
-        return $this->client->request('GET', "/api/v1/stream/channels/{$id}/messages", null, $params);
+        $request = $this->client->newReq('GET', "/api/v1/stream/channels/{$id}/messages");
+        foreach ($params as $key => $value) {
+            $request->setQueryParam($key, $value);
+        }
+        $res = $this->client->send($request);
+
+        return json_decode($res, true);
     }
 
+    /**
+     * List all stream subscriptions.
+     *
+     * @throws ApiException
+     */
     public function listSubscriptions(): array
     {
-        return $this->client->request('GET', '/api/v1/stream/subscriptions');
+        $request = $this->client->newReq('GET', '/api/v1/stream/subscriptions');
+        $res = $this->client->send($request);
+
+        return json_decode($res, true);
     }
 
+    /**
+     * Disconnect a stream subscription.
+     *
+     * @throws ApiException
+     */
     public function disconnectSubscription(string $id): void
     {
-        $this->client->request('DELETE', "/api/v1/stream/subscriptions/{$id}");
+        $request = $this->client->newReq('DELETE', "/api/v1/stream/subscriptions/{$id}");
+        $this->client->sendNoResponseBody($request);
     }
 
+    /**
+     * Publish a message to a stream channel.
+     *
+     * @throws ApiException
+     */
     public function publish(array $body): array
     {
-        return $this->client->request('POST', '/api/v1/stream/publish', $body);
+        $request = $this->client->newReq('POST', '/api/v1/stream/publish');
+        $request->setBody(json_encode($body));
+        $res = $this->client->send($request);
+
+        return json_decode($res, true);
     }
 }
