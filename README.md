@@ -149,6 +149,10 @@ $client = new HookSniff("sk_live_xxx", $options);
 HOOKSNIFF_DEBUG=1 php your_script.php
 ```
 
+## Examples
+
+See [EXAMPLES.md](EXAMPLES.md) for detailed usage examples covering all 35 resources.
+
 ## Links
 
 - [Documentation](https://hooksniff.com/docs)
