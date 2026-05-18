@@ -66,9 +66,11 @@ class HookSniffHttpClient
         while ($attempt <= $maxRetries) {
 
             // Build headers
+            $sdkUA = 'hooksniff-libs/' . Version::VERSION . '/php';
             $headers = array_merge([
                 'Authorization' => 'Bearer ' . $this->token,
-                'User-Agent' => 'hooksniff-libs/' . Version::VERSION . '/php',
+                'User-Agent' => $sdkUA,
+                'X-HookSniff-SDK' => $sdkUA,
                 'hooksniff-req-id' => (string)random_int(0, PHP_INT_MAX),
             ], $req->headerParams);
 
