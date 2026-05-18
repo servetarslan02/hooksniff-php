@@ -104,4 +104,93 @@ class TypedWebhookEventTest extends TestCase
         $this->assertArrayHasKey('message.attempt.exhausted', WebhookEvent::EVENT_TYPE_MAP);
         $this->assertCount(8, WebhookEvent::EVENT_TYPE_MAP);
     }
+
+    public function testEndpointUpdated()
+    {
+        $event = WebhookEvent::parse([
+            'event' => 'endpoint.updated',
+            'data' => ['appId' => 'a1', 'endpointId' => 'e1'],
+            'timestamp' => '',
+        ]);
+        $this->assertEquals('endpoint.updated', $event->getEvent());
+    }
+
+    public function testEndpointDeleted()
+    {
+        $event = WebhookEvent::parse([
+            'event' => 'endpoint.deleted',
+            'data' => ['appId' => 'a1', 'endpointId' => 'e1'],
+            'timestamp' => '',
+        ]);
+        $this->assertEquals('endpoint.deleted', $event->getEvent());
+    }
+
+    public function testEndpointEnabled()
+    {
+        $event = WebhookEvent::parse([
+            'event' => 'endpoint.enabled',
+            'data' => ['appId' => 'a1', 'endpointId' => 'e1'],
+            'timestamp' => '',
+        ]);
+        $this->assertEquals('endpoint.enabled', $event->getEvent());
+    }
+
+    public function testMessageAttemptFailing()
+    {
+        $event = WebhookEvent::parse([
+            'event' => 'message.attempt.failing',
+            'data' => [
+                'appId' => 'a1', 'msgId' => 'm1',
+                'attempt' => ['id' => 'att', 'timestamp' => 't', 'responseStatusCode' => 429],
+            ],
+            'timestamp' => '',
+        ]);
+        $data = $event->parseMessageAttemptFailingData();
+        $this->assertEquals(429, $data->attempt->responseStatusCode);
+    }
+
+    public function testMessageAttemptRecovered()
+    {
+        $event = WebhookEvent::parse([
+            'event' => 'message.atattempt.recovered',
+            'data' => [
+                'appId' => 'a1', 'msgId' => 'm1',
+                'attempt' => ['id' => 'att', 'timestamp' => 't', 'responseStatusCode' => 200],
+            ],
+            'timestamp' => '',
+        ]);
+        $data = $event->parseMessageAttemptRecoveredData();
+        $this->assertEquals(200, $data->attempt->responseStatusCode);
+    }
+
+    public function testEmptyData()
+    {
+        $event = WebhookEvent::parse(['event' => 'endpoint.created', 'data' => [], 'timestamp' => '']);
+        $data = $event->parseEndpointCreatedData();
+        $this->assertEquals('', $data->appId);
+    }
+
+    public function testUnicodeData()
+    {
+        $event = WebhookEvent::parse([
+            'event' => 'endpoint.created',
+            'data' => ['appId' => 'ünïcödé', 'endpointId' => '日本語'],
+            'timestamp' => '',
+        ]);
+        $data = $event->parseEndpointCreatedData();
+        $this->assertEquals('ünïcödé', $data->appId);
+        $this->assertEquals('日本語', $data->endpointId);
+    }
+
+    public function testMissingEventField()
+    {
+        $event = WebhookEvent::parse(['data' => ['x' => 1], 'timestamp' => '']);
+        $this->assertEquals('', $event->getEvent());
+    }
+
+    public function testMissingTimestampField()
+    {
+        $event = WebhookEvent::parse(['event' => 'test', 'data' => []]);
+        $this->assertEquals('', $event->getTimestamp());
+    }
 }
