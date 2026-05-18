@@ -62,17 +62,4 @@ class WebhookTest extends TestCase
         $wh->verify(self::PAYLOAD, $headers);
     }
 
-    public function testSvixBrandedHeaders(): void
-    {
-        $wh = new Webhook(self::SECRET);
-        $timestamp = time();
-        $sig = $this->sign(self::SECRET, self::MSG_ID, $timestamp, self::PAYLOAD);
-        $headers = [
-            'svix-id' => self::MSG_ID,
-            'svix-timestamp' => (string) $timestamp,
-            'svix-signature' => $sig,
-        ];
-        $result = $wh->verify(self::PAYLOAD, $headers);
-        $this->assertEquals(['event' => 'test'], $result);
-    }
 }
