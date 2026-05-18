@@ -8,7 +8,7 @@ use GuzzleHttp\Client;
 
 class HookSniffRequestContext
 {
-    /** @var string The API base URL, for example "https://api.hooksniff.com" */
+    /** @var string The API base URL, for example "https://hooksniff-api-1046140057667.europe-west1.run.app" */
     public string $baseUrl;
     /** @var string The 'bearer' scheme access token */
     public string $token;

@@ -7,7 +7,7 @@
   <a href="https://php.net"><img src="https://img.shields.io/badge/php-%3E%3D8.1-777BB4" alt="PHP Version"></a>
 </p>
 
-Official PHP SDK for the [HookSniff](https://hooksniff.com) webhook delivery platform.
+Official PHP SDK for the [HookSniff](https://hooksniff.vercel.app) webhook delivery platform.
 
 ## Installation
 
@@ -133,7 +133,7 @@ try {
 use HookSniff\HookSniffOptions;
 
 $options = new HookSniffOptions(
-    serverUrl: 'https://api.hooksniff.com',  // Custom server
+    serverUrl: 'https://hooksniff-api-1046140057667.europe-west1.run.app',  // Custom server
     timeoutMs: 30000,                          // Request timeout
     numRetries: 2,                             // Retry count
     retryScheduleMs: [60, 120, 240],          // Retry delays
@@ -155,8 +155,8 @@ See [EXAMPLES.md](EXAMPLES.md) for detailed usage examples covering all 35 resou
 
 ## Links
 
-- [Documentation](https://hooksniff.com/docs)
-- [API Reference](https://hooksniff.com/docs/api)
+- [Documentation](https://hooksniff.vercel.app/docs)
+- [API Reference](https://hooksniff.vercel.app/docs/api)
 - [GitHub](https://github.com/servetarslan02/hooksniff-php)
 - [Packagist](https://packagist.org/packages/hooksniff/hooksniff)
 

@@ -35,7 +35,7 @@
         }
     ],
     "keywords": ["webhooks", "api", "sdk", "hooksniff", "webhook-delivery", "http"],
-    "homepage": "https://hooksniff.com",
+    "homepage": "https://hooksniff.vercel.app",
     "support": {
         "issues": "https://github.com/servetarslan02/hooksniff-php/issues",
         "source": "https://github.com/servetarslan02/hooksniff-php"
