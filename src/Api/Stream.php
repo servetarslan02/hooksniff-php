@@ -133,3 +133,48 @@ class Stream
         return json_decode($res, true);
     }
 }
+
+    /**
+     * Subscribe to real-time events via SSE on a channel.
+     *
+     * @param string $channelId Channel ID to subscribe to
+     * @param callable $onEvent Callback for each event (receives array)
+     * @return void
+     * @throws ApiException
+     */
+    public function subscribe(string $channelId, callable $onEvent): void
+    {
+        $request = $this->client->newReq('GET', "/v1/stream/channels/{$channelId}/subscribe");
+        $request->setHeader('Accept', 'text/event-stream');
+
+        $url = $request->getUri();
+        $headers = $this->client->getHeaders();
+
+        $ch = curl_init();
+        curl_setopt_array($ch, [
+            CURLOPT_URL => $url,
+            CURLOPT_HTTPHEADER => array_map(fn($k, $v) => "$k: $v", array_keys($headers), $headers),
+            CURLOPT_RETURNTRANSFER => false,
+            CURLOPT_WRITEFUNCTION => function ($ch, $chunk) use ($onEvent) {
+                $lines = explode("\n", $chunk);
+                $eventType = '';
+                $data = '';
+                foreach ($lines as $line) {
+                    if (str_starts_with($line, 'event:')) {
+                        $eventType = trim(substr($line, 6));
+                    } elseif (str_starts_with($line, 'data:')) {
+                        $data = trim(substr($line, 5));
+                    } elseif (empty(trim($line)) && !empty($data)) {
+                        $onEvent(['event' => $eventType, 'data' => json_decode($data, true) ?? $data]);
+                        $eventType = '';
+                        $data = '';
+                    }
+                }
+                return strlen($chunk);
+            },
+            CURLOPT_CONNECTTIMEOUT => 30,
+            CURLOPT_TIMEOUT => 0, // SSE is long-lived
+        ]);
+        curl_exec($ch);
+        curl_close($ch);
+    }
