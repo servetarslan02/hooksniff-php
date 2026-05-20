@@ -163,24 +163,24 @@ class MessageIn implements \JsonSerializable
     public function jsonSerialize(): mixed
     {
         $data = [
-            'eventType' => $this->eventType,
-            'payload' => \HookSniff\Utils::newStdClassIfArrayIsEmpty($this->payload),
+            'event' => $this->eventType,
+            'data' => \HookSniff\Utils::newStdClassIfArrayIsEmpty($this->payload),
         ];
 
         if (isset($this->setFields['channels'])) {
             $data['channels'] = $this->channels;
         }
         if (isset($this->setFields['deliverAt'])) {
-            $data['deliverAt'] = $this->deliverAt->format('c');
+            $data['deliver_at'] = $this->deliverAt->format('c');
         }
         if (isset($this->setFields['eventId'])) {
-            $data['eventId'] = $this->eventId;
+            $data['event_id'] = $this->eventId;
         }
         if (isset($this->setFields['payloadRetentionHours'])) {
-            $data['payloadRetentionHours'] = $this->payloadRetentionHours;
+            $data['payload_retention_hours'] = $this->payloadRetentionHours;
         }
         if (isset($this->setFields['payloadRetentionPeriod'])) {
-            $data['payloadRetentionPeriod'] = $this->payloadRetentionPeriod;
+            $data['payload_retention_period'] = $this->payloadRetentionPeriod;
         }
         if (isset($this->setFields['tags'])) {
             $data['tags'] = $this->tags;
