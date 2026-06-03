@@ -1,5 +1,29 @@
 {
-    "description":  "Webhook delivery, monitoring, and management API. All endpoints under `/v1` require authentication via `Authorization: Bearer \u003capi_key\u003e` header unless marked as **Public**.",
+    "require":  {
+                    "guzzlehttp/guzzle":  "^7.3",
+                    "php":  "^8.1",
+                    "guzzlehttp/psr7":  "^1.7 || ^2.0",
+                    "ext-mbstring":  "*",
+                    "ext-json":  "*",
+                    "ext-curl":  "*"
+                },
+    "description":  "Webhook delivery, monitoring, and management API SDK for PHP",
+    "autoload":  {
+                     "psr-4":  {
+                                   "OpenAPI\\Client\\":  "lib/"
+                               }
+                 },
+    "require-dev":  {
+                        "friendsofphp/php-cs-fixer":  "^3.5",
+                        "phpunit/phpunit":  "^8.0 || ^9.0"
+                    },
+    "authors":  [
+                    {
+                        "homepage":  "https://hooksniff.vercel.app",
+                        "name":  "HookSniff"
+                    }
+                ],
+    "name":  "hooksniff/hooksniff-php",
     "keywords":  [
                      "openapitools",
                      "openapi-generator",
@@ -9,35 +33,11 @@
                      "rest",
                      "api"
                  ],
-    "homepage":  "https://openapi-generator.tech",
-    "license":  "unlicense",
-    "authors":  [
-                    {
-                        "name":  "OpenAPI",
-                        "homepage":  "https://openapi-generator.tech"
-                    }
-                ],
-    "require":  {
-                    "php":  "^8.1",
-                    "ext-curl":  "*",
-                    "ext-json":  "*",
-                    "ext-mbstring":  "*",
-                    "guzzlehttp/guzzle":  "^7.3",
-                    "guzzlehttp/psr7":  "^1.7 || ^2.0"
-                },
-    "require-dev":  {
-                        "phpunit/phpunit":  "^8.0 || ^9.0",
-                        "friendsofphp/php-cs-fixer":  "^3.5"
-                    },
-    "autoload":  {
-                     "psr-4":  {
-                                   "OpenAPI\\Client\\":  "lib/"
-                               }
-                 },
     "autoload-dev":  {
                          "psr-4":  {
                                        "OpenAPI\\Client\\Test\\":  "test/"
                                    }
                      },
-    "name":  "hooksniff/hooksniff-php"
+    "homepage":  "https://openapi-generator.tech",
+    "license":  "unlicense"
 }
