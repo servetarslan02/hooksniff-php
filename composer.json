@@ -38,6 +38,6 @@
                                        "OpenAPI\\Client\\Test\\":  "test/"
                                    }
                      },
-    "homepage":  "https://openapi-generator.tech",
+    "homepage":  "https://hooksniff.vercel.app",
     "license":  "unlicense"
 }
