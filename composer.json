@@ -1,49 +1,38 @@
 {
-    "name": "hooksniff/hooksniff",
-    "version": "1.2.1",
-    "description": "Official PHP SDK for the HookSniff webhook delivery API",
-    "type": "library",
-    "license": "MIT",
-    "minimum-stability": "stable",
-    "autoload": {
-        "psr-4": {
-            "HookSniff\\": "src/"
-        },
-        "files": [
-            "init.php"
-        ]
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "HookSniff\\Tests\\": "tests/"
-        }
-    },
-    "require": {
-        "php": ">=8.1",
-        "guzzlehttp/guzzle": "^7.0",
-        "ext-curl": "*",
-        "ext-json": "*",
-        "ext-hash": "*"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^10.0"
-    },
+    "description": "Webhook delivery, monitoring, and management API. All endpoints under `/v1` require authentication via `Authorization: Bearer <api_key>` header unless marked as **Public**.",
+    "keywords": [
+        "openapitools",
+        "openapi-generator",
+        "openapi",
+        "php",
+        "sdk",
+        "rest",
+        "api"
+    ],
+    "homepage": "https://openapi-generator.tech",
+    "license": "unlicense",
     "authors": [
         {
-            "name": "HookSniff",
-            "email": "servetarslan02@gmail.com"
+            "name": "OpenAPI",
+            "homepage": "https://openapi-generator.tech"
         }
     ],
-    "keywords": ["webhooks", "api", "sdk", "hooksniff", "webhook-delivery", "http"],
-    "homepage": "https://hooksniff.vercel.app",
-    "support": {
-        "issues": "https://github.com/servetarslan02/hooksniff-php/issues",
-        "source": "https://github.com/servetarslan02/hooksniff-php"
+    "require": {
+        "php": "^8.1",
+        "ext-curl": "*",
+        "ext-json": "*",
+        "ext-mbstring": "*",
+        "guzzlehttp/guzzle": "^7.3",
+        "guzzlehttp/psr7": "^1.7 || ^2.0"
     },
-    "funding": [
-        {
-            "type": "github",
-            "url": "https://github.com/servetarslan02"
-        }
-    ]
+    "require-dev": {
+        "phpunit/phpunit": "^8.0 || ^9.0",
+        "friendsofphp/php-cs-fixer": "^3.5"
+    },
+    "autoload": {
+        "psr-4": { "OpenAPI\\Client\\" : "lib/" }
+    },
+    "autoload-dev": {
+        "psr-4": { "OpenAPI\\Client\\Test\\" : "test/" }
+    }
 }
