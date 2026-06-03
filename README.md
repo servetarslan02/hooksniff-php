@@ -133,7 +133,7 @@ try {
 use HookSniff\HookSniffOptions;
 
 $options = new HookSniffOptions(
-    serverUrl: 'https://hooksniff-api-1046140057667.europe-west1.run.app',  // Custom server
+    serverUrl: 'https://hooksniff-api-e6ztf3x2ma-ew.a.run.app',  // Custom server
     timeoutMs: 30000,                          // Request timeout
     numRetries: 2,                             // Retry count
     retryScheduleMs: [60, 120, 240],          // Retry delays
