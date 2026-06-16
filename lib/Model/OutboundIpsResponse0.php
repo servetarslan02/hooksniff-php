@@ -1,6 +1,6 @@
 <?php
 /**
- * OutboundIpsResponse
+ * OutboundIPsResponse
  *
  * PHP version 8.1
  *
@@ -33,7 +33,7 @@ use \ArrayAccess;
 use \OpenAPI\Client\ObjectSerializer;
 
 /**
- * OutboundIpsResponse Class Doc Comment
+ * OutboundIPsResponse Class Doc Comment
  *
  * @category Class
  * @package  OpenAPI\Client
@@ -41,7 +41,7 @@ use \OpenAPI\Client\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class OutboundIpsResponse implements ModelInterface, ArrayAccess, \JsonSerializable
+class OutboundIPsResponse implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +50,7 @@ class OutboundIpsResponse implements ModelInterface, ArrayAccess, \JsonSerializa
      *
      * @var string
      */
-    protected static $openAPIModelName = 'OutboundIpsResponse';
+    protected static $openAPIModelName = 'OutboundIPsResponse';
 
     /**
      * Array of property to type mappings. Used for (de)serialization

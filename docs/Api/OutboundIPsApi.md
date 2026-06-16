@@ -12,7 +12,7 @@ All URIs are relative to https://hooksniff-api-e6ztf3x2ma-ew.a.run.app/v1, excep
 ## `outboundIpsGet()`
 
 ```php
-outboundIpsGet(): \OpenAPI\Client\Model\OutboundIpsResponse
+outboundIpsGet(): \OpenAPI\Client\Model\OutboundIPsResponse
 ```
 
 Get outbound IP addresses for firewall whitelisting
@@ -45,7 +45,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**\OpenAPI\Client\Model\OutboundIpsResponse**](../Model/OutboundIpsResponse.md)
+[**\OpenAPI\Client\Model\OutboundIPsResponse**](../Model/OutboundIPsResponse.md)
 
 ### Authorization
 

@@ -135,7 +135,7 @@ class OutboundIPsApi
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \OpenAPI\Client\Model\OutboundIpsResponse
+     * @return \OpenAPI\Client\Model\OutboundIPsResponse
      */
     public function outboundIpsGet(string $contentType = self::contentTypes['outboundIpsGet'][0])
     {
@@ -152,7 +152,7 @@ class OutboundIPsApi
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \OpenAPI\Client\Model\OutboundIpsResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \OpenAPI\Client\Model\OutboundIPsResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function outboundIpsGetWithHttpInfo(string $contentType = self::contentTypes['outboundIpsGet'][0])
     {
@@ -184,7 +184,7 @@ class OutboundIPsApi
             switch($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        '\OpenAPI\Client\Model\OutboundIpsResponse',
+                        '\OpenAPI\Client\Model\OutboundIPsResponse',
                         $request,
                         $response,
                     );
@@ -206,7 +206,7 @@ class OutboundIPsApi
             }
 
             return $this->handleResponseWithDataType(
-                '\OpenAPI\Client\Model\OutboundIpsResponse',
+                '\OpenAPI\Client\Model\OutboundIPsResponse',
                 $request,
                 $response,
             );
@@ -215,7 +215,7 @@ class OutboundIPsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\OpenAPI\Client\Model\OutboundIpsResponse',
+                        '\OpenAPI\Client\Model\OutboundIPsResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -259,7 +259,7 @@ class OutboundIPsApi
      */
     public function outboundIpsGetAsyncWithHttpInfo(string $contentType = self::contentTypes['outboundIpsGet'][0])
     {
-        $returnType = '\OpenAPI\Client\Model\OutboundIpsResponse';
+        $returnType = '\OpenAPI\Client\Model\OutboundIPsResponse';
         $request = $this->outboundIpsGetRequest($contentType);
 
         return $this->client
